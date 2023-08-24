@@ -1,0 +1,322 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+/* -----------------------          my style            -------------------------- */
+
+body {
+  color: #333;
+  /* Dark gray */
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+  /* Enable scrolling on the whole page */
+
+  background-image: url("N:\Selim\Github\catering-new\menu\static\menu\cateringNEW.jpg");
+  /*  TODO: copy final path */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: transparent;
+  /* Set the background color to transparent */
+}
+
+.container-xl {
+
+
+  border-radius: 50px;
+  background: linear-gradient(145deg, #f3f3f3, #cccccc, 0.4);
+  box-shadow: 27px 27px 54px #c1c1c1,
+    -27px -27px 54px #ffffff;
+}
+
+/*test*/
+
+h3 {
+  color: #000000;
+  text-shadow: 2px 2px 4px rgba(255, 228, 196, 0.5);
+}
+
+
+
+
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: rgb(10, 42, 132);
+}
+
+input[type="text"],
+select {
+  padding: 5px;
+  border: 1px solid #ff7f50;
+  /* Orange */
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #ff7f50;
+  /* Orange */
+  color: #fff;
+  /* White */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+}
+
+button[type="submit"]:hover {
+  background-color: #e75e3e;
+}
+
+
+
+#cateringArt {
+  margin-left: 6px;
+}
+
+
+.contact-form label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+
+.contact-form select,
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+/* .contact-form input[type="checkbox"] {
+  display: inline-block;
+  width: 250px;
+} */
+
+.card {
+  background-color: #f3a476;
+
+  border-radius: 5px;
+  /* color: #FFF; */
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: 2s;
+}
+
+.card-title {
+  color: #FFF;
+}
+
+.form-label {
+  color: #FFF;
+}
+
+.form-control {
+  background-color: #FFF;
+  color: #F95A00;
+  border-color: #FFF;
+}
+
+.form-check-label {
+  color: #FFF;
+}
+
+.btn-primary {
+  background-color: #F95A00;
+  border-color: #F95A00;
+}
+
+#contact {
+  width: 90%;
+}
+
+
+/* NEW STYLE --- putting all html <style/> in this file */
+
+
+
+.ui-timepicker-container {
+  font-size: 25px;
+  /* Adjust the font size as needed */
+  width: 150px;
+  /* Adjust the width as needed */
+}
+
+.ui-timepicker-list li {
+  padding: 5px;
+  font-size: 12px;
+}
+
+.timepicker-container {
+  position: relative;
+}
+
+.timepicker-container input[type="text"] {
+  padding-right: 30px;
+  /* Adjust the padding as needed */
+}
+
+.timepicker-container .timepicker-icon {
+  position: absolute;
+  top: 60%;
+  right: 10px;
+  /* Adjust the position as needed */
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.timepicker-container .timepicker-icon::before {
+  content: "\25BE";
+  /* Unicode arrow-down symbol */
+  font-size: 20px;
+  /* Adjust the font size as needed */
+}
+
+.hidden-input {
+  display: none;
+}
+
+
+
+/* Button styles */
+#book-now {
+  background-color: #a05941;
+  /* Green background color */
+  border: none;
+  /* Remove border */
+  color: white;
+  /* Text color */
+  padding: 10px 20px;
+  /* Add some padding */
+  text-align: center;
+  /* Center the text */
+  text-decoration: none;
+  /* Remove underline */
+  display: inline-block;
+  /* Display as inline-block */
+  font-size: 16px;
+  /* Set the font size */
+  border-radius: 4px;
+  /* Add some border radius */
+  cursor: pointer;
+  /* Add cursor on hover */
+  transition: background-color 0.3s ease;
+  /* Add smooth transition */
+}
+
+/* Button hover effect */
+#book-now:hover {
+  background-color: #853328;
+  /* Darker green color on hover */
+}
+
+/* CSS for the spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 10px auto;
+  border-radius: 50%;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.infoSubContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
+.infoContainer {
+  display: flex;
+
+}
+
+.menu-container {
+  border-radius: 50px;
+  background: #0d6efd;
+  box-shadow: 8px 8px 10px #0b5dd74b,
+    -8px -8px 10px #0b5dd74b;
+  padding: 20px;
+  width:100%;
+
+}
+.menuContainer{
+  background-color: white;
+  width: 70%;
+}
+.checkbox-container{
+  width: 100%;
+}
+
+
+#root{
+  width:100%;
+}

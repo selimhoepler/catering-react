@@ -1,0 +1,496 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unverbindliche Catering Anfrage</title>
+    <link rel="stylesheet" href="{% static 'menu/style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="https://kit.fontawesome.com/b6d4ed3f19.js" crossorigin="anonymous"></script>
+    
+    <script>
+
+            function ckChange() {
+                    var cateringGroup = document.getElementById('cateringGroup');
+                    var selectedValue = parseInt(cateringGroup.value);
+
+                    if (selectedValue >= 5 && selectedValue <= 20) {
+
+                        var div = document.getElementById('div1'); // Replace '' with the ID of specific div
+                        var ckName = div.getElementsByTagName('input'); // Get all input elements within the div
+                        var checkedCount = 0; // Counter variable for checked checkboxes
+
+                        for (var i = 0; i < ckName.length; i++) {
+                        var c = ckName[i];
+                            if (c.type === 'checkbox' && c.checked) {
+                                checkedCount++;
+                            }
+                        }
+
+                        for (var i = 0; i < ckName.length; i++) {
+                        var c = ckName[i];
+                            if (c.type === 'checkbox') {
+                                if (checkedCount >= 2 && !c.checked) {
+                                c.disabled = true;
+                                } else {
+                                c.disabled = false;
+                                }
+                            }
+                        }
+
+                        } else if (selectedValue >= 21 && selectedValue <= 40) {
+                            var div = document.getElementById('div1'); // Replace '' with the ID of specific div
+                            var ckName = div.getElementsByTagName('input'); // Get all input elements within the div
+                            var checkedCount = 0; // Counter variable for checked checkboxes
+
+                            for (var i = 0; i < ckName.length; i++) {
+                                var c = ckName[i];
+                                if (c.type === 'checkbox' && c.checked) {
+                                    checkedCount++;
+                                }
+                            }
+
+                            for (var i = 0; i < ckName.length; i++) {
+                                var c = ckName[i];
+                                if (c.type === 'checkbox') {
+                                    if (checkedCount >= 3 && !c.checked) {
+                                        c.disabled = true;
+                                    } else {
+                                        c.disabled = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+            function ckChange2() {
+                    var cateringGroup = document.getElementById('cateringGroup');
+                    var selectedValue = parseInt(cateringGroup.value);
+
+                    if (selectedValue >= 5 && selectedValue <= 20) {
+                        var div = document.getElementById('div2');
+                        var ckName = div.getElementsByTagName('input');
+                        var checkedCount = 0;
+
+                        for (var i = 0; i < ckName.length; i++) {
+                            var c = ckName[i];
+                            if (c.type === 'checkbox' && c.checked) {
+                                checkedCount++;
+                            }
+                        }
+
+                        for (var i = 0; i < ckName.length; i++) {
+                            var c = ckName[i];
+                            if (c.type === 'checkbox') {
+                                if (checkedCount >= 2 && !c.checked) {
+                                    c.disabled = true;
+                                } else {
+                                    c.disabled = false;
+                                }
+                            }
+                        }
+                    } else if (selectedValue >= 21 && selectedValue <= 40) {
+                        var div = document.getElementById('div2');
+                        var ckName = div.getElementsByTagName('input');
+                        var checkedCount = 0;
+
+                        for (var i = 0; i < ckName.length; i++) {
+                            var c = ckName[i];
+                            if (c.type === 'checkbox' && c.checked) {
+                                checkedCount++;
+                            }
+                        }
+
+                        for (var i = 0; i < ckName.length; i++) {
+                            var c = ckName[i];
+                            if (c.type === 'checkbox') {
+                                if (checkedCount >= 3 && !c.checked) {
+                                    c.disabled = true;
+                                } else {
+                                    c.disabled = false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            function ckChange3() {
+                var cateringGroup = document.getElementById('cateringGroup');
+                var selectedValue = parseInt(cateringGroup.value);
+
+                if (selectedValue >= 5 && selectedValue <= 20) {
+                    var div = document.getElementById('div3');
+                    var ckName = div.getElementsByTagName('input');
+                    var checkedCount = 0;
+
+                    for (var i = 0; i < ckName.length; i++) {
+                        var c = ckName[i];
+                        if (c.type === 'checkbox' && c.checked) {
+                            checkedCount++;
+                        }
+                    }
+
+                    for (var i = 0; i < ckName.length; i++) {
+                        var c = ckName[i];
+                        if (c.type === 'checkbox') {
+                            if (checkedCount >= 2 && !c.checked) {
+                                c.disabled = true;
+                            } else {
+                                c.disabled = false;
+                            }
+                        }
+                    }
+                } else if (selectedValue >= 21 && selectedValue <= 40) {
+                    var div = document.getElementById('div3');
+                    var ckName = div.getElementsByTagName('input');
+                    var checkedCount = 0;
+
+                    for (var i = 0; i < ckName.length; i++) {
+                        var c = ckName[i];
+                        if (c.type === 'checkbox' && c.checked) {
+                            checkedCount++;
+                        }
+                    }
+
+                    for (var i = 0; i < ckName.length; i++) {
+                        var c = ckName[i];
+                        if (c.type === 'checkbox') {
+                            if (checkedCount >= 3 && !c.checked) {
+                                c.disabled = true;
+                            } else {
+                                c.disabled = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            const toggleDivVisibility = () => {
+                var secondFormDiv = document.getElementById("second_form");
+                if (secondFormDiv.style.display === "none") {
+                secondFormDiv.style.display = "block";
+                } else {
+                secondFormDiv.style.display = "none";
+                }
+            }
+
+            function handleCateringArtChange() {
+                var cateringArt = document.getElementById('cateringArt').value;
+                var menuContainer = document.getElementById('menuContainer');
+                var serviceSection = document.getElementById('serviceSection');
+                var serviceMessage = document.getElementById('serviceMessage');
+                var serviceCheckboxJa = document.querySelector('input[name="service"][value="ja"]');
+                var serviceCheckboxNein = document.querySelector('input[name="service"][value="nein"]');
+
+                if (cateringArt === 'buffet') {
+                    menuContainer.style.display = 'block';
+                    serviceSection.style.display = 'block';
+                    serviceMessage.style.display = 'none';
+                    serviceCheckboxJa.checked = false; // Uncheck "Ja" checkbox
+                    serviceCheckboxNein.checked = false; // Uncheck "Nein" checkbox
+                } else if (cateringArt === 'fingerfood') {
+                    menuContainer.style.display = 'none';
+                    serviceSection.style.display = 'none';
+                    serviceMessage.style.display = 'block';
+                    serviceCheckboxJa.checked = true; // Mark "Ja" checkbox as checked
+                    serviceCheckboxNein.checked = false; // Uncheck "Nein" checkbox
+                } else {
+                    menuContainer.style.display = 'none';
+                    serviceSection.style.display = 'block';
+                    serviceMessage.style.display = 'none';
+                    serviceCheckboxJa.checked = false; // Uncheck "Ja" checkbox
+                    serviceCheckboxNein.checked = false; // Uncheck "Nein" checkbox
+                }
+            }
+
+
+            function decrementGroupSize() {
+                var groupSizeInput = document.getElementById('groupSize');
+                var currentGroupSize = parseInt(groupSizeInput.value);
+
+                if (currentGroupSize > 1) {
+                    groupSizeInput.value = currentGroupSize - 1;
+                }
+            }
+
+            function incrementGroupSize() {
+                var groupSizeInput = document.getElementById('groupSize');
+                var currentGroupSize = parseInt(groupSizeInput.value);
+
+                groupSizeInput.value = currentGroupSize + 1;
+            }
+
+            function handleCheckboxClick(clickedCheckbox) {
+                const checkboxes = document.getElementsByName("service");
+                checkboxes.forEach((checkbox) => {
+                    if (checkbox !== clickedCheckbox) {
+                        checkbox.disabled = clickedCheckbox.checked;
+                    }
+                });
+            }
+
+                window.onload = function() {
+                var drinksSelect = document.getElementById("drinks");
+                drinksSelect.value = "nein";
+                handleDrinksChange();
+            }
+
+            function handleDrinksChange() {
+                var drinksSelect = document.getElementById("drinks");
+                var drinksContainer = document.getElementById("drinksContainer");
+
+                if (drinksSelect.value === "ja") {
+                    drinksContainer.style.display = "block";
+                } else {
+                    drinksContainer.style.display = "none";
+                }
+            }
+
+            function initializeDisplay() {
+                handleCateringArtChange();
+                handleDrinksChange();
+            }
+
+            window.onload = initializeDisplay;
+    </script>
+</head>
+<body>
+    <div class="container-xl">
+        <h2>Unverbindliche Catering Anfrage</h2>
+        <br>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <div>
+                <label for="date" style="text-align: center;">Datum:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <br>
+            
+            
+            
+
+            
+            <!-- gelöschtes <script> "timepickerScript" -->
+
+            <!-- gelöschtes <script> "datepickerScript" -->
+
+       
+            <br>
+            <br>
+
+
+            <div class="timepicker-container">
+                <label for="start_time" style="text-align: center;" class="label label-info">Startzeit:</label>
+                <input type="text" id="start_time" name="start_time" class="timepicker1">
+                <span class="timepicker-icon"></span> <!-- Unicode arrow-down symbol -->
+            </div>
+            
+            <div class="timepicker-container">
+                <label for="end_time" style="text-align: center;">Endzeit:</label>
+                <input type="text" id="end_time" name="end_time" class="timepicker2">
+                <span class="timepicker-icon"></span> <!-- Unicode arrow-down symbol -->
+            </div>
+
+
+
+
+            <div class="card">
+                <input type="checkbox" name="mealtime" value="Frühstück"> Frühstück
+                <input type="checkbox" name="mealtime" value="Mittag"> Mittag
+                <input type="checkbox" name="mealtime" value="Abendessen"> Abendessen
+            </div>
+
+            <div id="cateringGroupContainer">
+
+                <label for="cateringGroup" style="text-align: center;">Catering Gruppe</label>  
+                <input type="number" id="cateringGroup" name="cateringGroup" min="5" max="100" value="0" style="width: 200px; padding: 8px;" onclick="resetCheckboxes()" onchange="resetCheckboxes()">
+            </div>
+            <br><br><br><br><br>
+            <table style="width: 100%; text-align: center;">
+                <div>
+                    <tr>
+                    <td style="width: 50%; font-size: small;"><strong>Für eine Gruppengröße von 5-20:</strong></td>
+                    <td style="width: 50%; font-size: small;"><strong>Für eine Gruppengröße von 21-40:</strong></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                    <td style="color: rgb(94, 37, 37); font-size: smaller; padding-left: 20px; white-space: normal;">können 2 Gerichte ausgewählt werden</td>
+                    <td style="color: rgb(94, 37, 37); font-size: smaller; padding-left: 20px; white-space: normal;">können 3 Gerichte ausgewählt werden</td>
+                    </tr>
+                </div>
+            </table>
+            
+            <br>
+
+
+
+            <div id="groupSizeContainer" style="display: none;">
+                <label>Genaue Gruppengröße</label>
+                <button type="button" id="decrementBtn" onclick="decrementGroupSize()">-</button>
+                <input type="text" id="groupSize" name="groupSize" value="5" readonly>
+                <button type="button" id="incrementBtn" onclick="incrementGroupSize()">+</button>
+            </div>
+
+
+            <h3 id="billAmount"></h3>
+
+
+            <div>
+                <label>Catering Art</label>
+                <select id="cateringArt" name="cateringArt" onchange="handleCateringArtChange()">
+                    <option value="fingerfood">Fingerfood</option>
+                    <option value="buffet">Buffet</option>
+                </select>
+            </div>
+
+            <div id="menuContainer" style="display: none;">
+                <h3>Auswahl Menü</h3>
+
+                <div class="card" id="div1">
+                    <h4>Vorspeisen</h4>
+                    <input type="checkbox" name="meal" onClick="ckChange(this)" value="div1:Mozzarella">Mozzarella mit marinierten Kirschtomaten und Gebäck<br>
+                    <input type="checkbox" name="meal" onClick="ckChange(this)" value="div1:Schinkenröllchen gefüllt mit Kräuter Gervais auf Blattsalat">Schinkenröllchen gefüllt mit Kräuter Gervais auf Blattsalat<br>
+                    <input type="checkbox" name="meal" onClick="ckChange(this)" value="div1:Couscous Salat mit Gemüse (VEGAN)">Couscous Salat mit Gemüse (VEGAN)<br>
+                    <input type="checkbox" name="meal" onClick="ckChange(this)" value="div1:Prosciutto mit Melone">Prosciutto mit Melone<br>
+                    <input type="checkbox" name="meal" onClick="ckChange(this)" value="div1:Spinattasche mit Kräuterdip">Spinattasche mit Kräuterdip<br>
+                </div>
+
+                <div class="card" id="div2">
+                    <h4>Hauptspeisen</h4>
+                    <input type="checkbox" name="meal" onClick="ckChange2(this)" value="div2:Hühnerschnitzel">Hühnerschnitzel mit Kartoffel-Vogerlsalat<br>
+                    <input type="checkbox" name="meal" onClick="ckChange2(this)" value="div2:Faschierte Laibchen mit Petersilienkartoffeln">Faschierte Laibchen mit Petersilienkartoffeln<br>
+                    <input type="checkbox" name="meal" onClick="ckChange2(this)" value="div2:Karfiol-Käselaibchen mit Blattsalat und Dip (VEGETARISCH)">Karfiol-Käselaibchen mit Blattsalat und Dip (VEGETARISCH)<br>
+                    <input type="checkbox" name="meal" onClick="ckChange2(this)" value="div2:Penne mit Grünkernbolognese (VEGAN)">Penne mit Grünkernbolognese (VEGAN)<br>
+                    <input type="checkbox" name="meal" onClick="ckChange2(this)" value="div2:Geschnetzeltes vom Schwein mit Reis">Geschnetzeltes vom Schwein mit Reis<br>
+                </div>
+
+                <div class="card" id="div3">
+                    <h4>Dessert</h4>
+                    <input type="checkbox" name="meal" onClick="ckChange3(this)" value="div3:Schokomousse">Schokomousse mit Beerenragout im Glas<br>
+                    <input type="checkbox" name="meal" onClick="ckChange3(this)" value="div3:Apfelstrudel in der Manschette">Apfelstrudel in der Manschette<br>
+                    <input type="checkbox" name="meal" onClick="ckChange3(this)" value="div3:Apfelstrudel...">Apfelstrudel...<br>
+                    <input type="checkbox" name="meal" onClick="ckChange3(this)" value="div3:Topfen...">Topfen...<br>
+                </div>
+            </div>
+
+            <div id="serviceSection">
+                <h3>Benötigen Sie Service vor Ort?</h3>
+                <input type="checkbox" name="service" value="ja" onclick="handleCheckboxClick(this)"> Ja <br>
+                <input type="checkbox" name="service" value="nein" onclick="handleCheckboxClick(this)"> Nein <br>
+            </div>
+
+            <div id="serviceMessage" style="display: none; color: red;">
+                Service wird benötigt!
+            </div>
+            <br>
+            <div>
+                <label>Getränke</label>
+                <select id="drinks" onchange="handleDrinksChange()">
+                    <option value="ja">Ja</option>
+                    <option value="nein">Nein</option>
+                </select>
+            </div>
+
+
+                <!-- Your existing code for drink choices -->
+                <div id="drinksContainer" name="drinksContainer" style="display: none;">
+                    <div class="card" id="drinksMenu" name="drinksMenu">
+                        <h5>Alkoholfrei</h5>
+                        <input type="checkbox" id="orangensaft" name="drinks" value="Orangensaft" onClick="handleDrinksChange(this)">Orangensaft<br>
+                        <input type="checkbox" id="apfelsaft" name="drinks" value="Apfelsaft" onClick="handleDrinksChange(this)">Apfelsaft<br>
+                        <input type="checkbox" id="ananas" name="drinks" value="Ananas" onClick="handleDrinksChange(this)">Ananas pro liter<br>
+                        <input type="checkbox" id="mineralwasser" name="drinks" value="Mineralwasser" onClick="handleDrinksChange(this)">Mineralwasser still - pricklend pro Liter / 4.20€<br>
+                        <input type="checkbox" id="cola" name="drinks" value="Cola" onClick="handleDrinksChange(this)">Cola / Cola Zero<br><br>
+
+                        <!-- Remaining drink choices -->
+                    </div>
+                    <div class="card" id="drinksMenu" name="drinksMenu">
+                        <h5>Alkohol</h5>
+                        <input type="checkbox" id="ottakringer" name="drinks" value="Ottakringer" onClick="handleDrinksChange(this)">Ottakringer<br>
+                        <input type="checkbox" id="weingut-schrey" name="drinks" value="Weingut Schrey" onClick="handleDrinksChange(this)">Weingut Schrey<br>
+                        <input type="checkbox" id="weisswein" name="drinks" value="Weisswein" onClick="handleDrinksChange(this)">Weisswein Grüner Verltliner 0.75<br>
+                        <input type="checkbox" id="rotwein" name="drinks" value="Rotwein" onClick="handleDrinksChange(this)">Rotwein Zweigelt 0.75<br>
+                        <input type="checkbox" id="prosecco" name="drinks" value="Prosecco" onClick="handleDrinksChange(this)">Prosecco 0.75<br>
+                    </div>
+                </div>
+
+
+            <h3>Ausstattung</h3>
+            <div class="card" id="ausstattung">
+                <input type="checkbox" name="personen" value="Geschirr/Tischwäsche" onchange="toggleGeschirrTischSelection()">Geschirr / Tischwäsche<br>
+                <input type="checkbox">Stehpulte + Hussen</input>
+                <input type="number" name="stehlpulteCount" id="stehlpulteCount" value="0" min="0" onchange="updateStehpultKosten()">
+            </div>
+
+            <h3 id="billCounter"></h3>
+            <h3 id="lastBill" name="lastBill"></h3>
+            <input type="hidden" id="lastBillInput" name="lastBill" value="">
+            <br>
+            <div id="contact" class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Kontakt Formular</h4>
+                    <form action="/submit-form" method="POST">
+                    <div class="mb-3">
+                        <label for="anrede" class="form-label">Anrede:</label>
+                        <select id="anrede" name="anrede" class="form-select" required>
+                        <option value="Herr">Herr</option>
+                        <option value="Frau">Frau</option>
+                        <option value="Andere">Andere</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="vorname" class="form-label">Vorname:</label>
+                        <input type="text" id="vorname" name="vorname" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nachname" class="form-label">Nachname:</label>
+                        <input type="text" id="nachname" name="nachname" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-Mail Adresse:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <label for="telefon" class="form-label">Telefonnummer:</label>
+                        <input type="tel" id="telefon" name="telefon" class="form-control" required>
+                    </div>
+                    </form>
+                    <br>
+                    <!-- <input type="checkbox" required> Ich akzeptiere die <a href="https://top-lokal.at/datenschutz-impressum/" target="_blank">Datenschutzbestimmungen</a>. -->
+                    <input type="checkbox" id="privacy-checkbox" required> Ich akzeptiere die <a href="https://top-lokal.at/datenschutz-impressum/" target="_blank">Datenschutzbestimmungen</a>.
+                     <span style="color: red;">*</span>
+                    <br>
+                </div>
+                <h3>Anmerkungen</h3>
+                <textarea id="notice_content" name="notice_content" rows="10" cols="50"></textarea>
+            </div>
+            <br>
+        </form>
+    </div>
+    <br>
+    <br>
+    <button id="book-now">Jetzt Buchen</button>
+    <div id="loading-message" style="display: none;">
+      Bitte warten Sie, während Ihre Buchung bearbeitet wird...
+      <br>
+      <div id="spinner" class="spinner"></div>
+    </div>
+
+
+
+</body>
+
+<script src="{% static 'menu/script.js' %}"></script>
+</html>
+
