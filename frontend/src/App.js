@@ -7,7 +7,7 @@ import Form from './Form';
 function App() {
   return (
       <div className='menuContainer'>
-        <h2>Unverbindliche Catering Anfrage</h2>
+        {/* <h2>Unverbindliche Catering Anfrage</h2> */}
         <Form />
       </div>
     );

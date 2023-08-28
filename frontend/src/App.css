@@ -43,21 +43,27 @@
 
 /* -----------------------          my style            -------------------------- */
 
+
+html {
+  height: 100%;
+  /* Enable scrolling on the whole page */
+}
+
 body {
-  color: #333;
+  color: #E75012 !important;
   /* Dark gray */
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+  font-family: Arial, sans-serif !important;
   align-items: center;
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
   overflow: auto;
+  height: 100%;
   /* Enable scrolling on the whole page */
 
-  background-image: url("N:\Selim\Github\catering-new\menu\static\menu\cateringNEW.jpg");
+  /* background-image: url("N:\Selim\Github\catering-new\menu\static\menu\cateringNEW.jpg"); */
   /*  TODO: copy final path */
+  background-color: #ffffff;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -90,15 +96,16 @@ h3 {
 form {
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  height: 100%;
+
 }
 
 label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
-  color: rgb(10, 42, 132);
+  /* color: rgb(10, 42, 132); */
 }
 
 input[type="text"],
@@ -173,7 +180,7 @@ button[type="submit"]:hover {
 }
 
 .form-check-label {
-  color: #FFF;
+  color: #000000;
 }
 
 .btn-primary {
@@ -300,23 +307,168 @@ button[type="submit"]:hover {
 }
 
 .menu-container {
-  border-radius: 50px;
-  background: #0d6efd;
-  box-shadow: 8px 8px 10px #0b5dd74b,
-    -8px -8px 10px #0b5dd74b;
-  padding: 20px;
-  width:100%;
-
-}
-.menuContainer{
-  background-color: white;
-  width: 70%;
-}
-.checkbox-container{
+  border-radius: 5px;
+  border-radius: 0px;
+  background: #ffffff;
+  box-shadow:  20px 20px 60px #d9d9d9,
+               -20px -20px 60px #ffffff;
+  padding: 10px;
+  margin-top: 10px;
   width: 100%;
+  height: 100%;
+
+}
+
+.menu-container .row {
+  height: 100%;
+}
+
+.menuContainer {
+  border-radius: 0px;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
+  height: 100%;
+  width: 80%;
+  padding: 20px;
+
+
+}
+
+.menu-selection-container {
+  display: flex;
+  height:600px
 }
 
 
-#root{
-  width:100%;
+#root {
+  width: 100%;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-container{
+  display: flex;
+  flex-direction: column;
+  padding:20px;
+  padding-top: 67px;
+
+}
+
+
+.info-card {
+  width: 350px;
+  margin-right: 10px;
+}
+
+.date-and-time{
+  display: flex; 
+  flex-direction: column;
+  border-bottom: solid 1px #403735;
+  padding-bottom: 40px;
+}
+
+.checkbox-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-left: 1px solid #403735;
+  width: 100%;
+  transition: height 0.3s ease-in;
+}
+
+.card{
+  overflow: auto;
+}
+
+.nav-pills {
+  --bs-nav-pills-border-radius: 0px !important;
+  --bs-nav-pills-link-active-color: #fff !important;
+  --bs-nav-pills-link-active-bg: #e75012 !important;
+  --bs-nav-link-color: #e75012 !important;
+  --bs-nav-link-hover-color: #fff !important;
+
+}
+
+.nav-pills .nav-link{
+  font-size: x-large;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.nav-item{
+  transition: all 0.15s ease-in-out;
+  flex:1;
+}
+
+.my-col{
+  background-color: #4e3022;
+   border-right: 1px solid #403735;
+   padding: 0px !important;
+}
+.nav-item a{
+  height:100%;
+  display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-item:hover{
+  background-color: #e75012 !important;
+}
+
+.menu-card{
+  margin-right: 10px;
+  border: none !important;
+  border-right: 1px solid #403735 !important;
+  border-radius: 0px !important;
+}
+
+
+.my-button-active{
+  background-color: #e75012 !important;
+  color: #fff !important;
+  border-radius: 0px !important;
+  border-color: #E75012 !important;
+}
+
+.my-button-inactive{
+  background-color: #fff !important;
+  color: #e75012 !important;
+  border-color: #E75012 !important;
+  border-radius: 0px !important;
+}
+
+.my-button-inactive:hover{
+  background-color: #e75012 !important;
+  color: #fff !important;
+}
+
+
+/* ------------------------ SCrollbar ------------------------ */
+
+::-webkit-scrollbar {
+  width: 6px;
+
+}  
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4e3022; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4e3022b7; 
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import TimePicker from 'react-time-picker'
 import CateringArt from './form_components/CateringArt';
+import { MealtimeRadioGroup, CateringGroupInput, Auststattung } from './form_components/minor_components';
 
 const Form = () => {
   // State für die Formular-Daten
@@ -8,16 +8,17 @@ const Form = () => {
     bookingID: '',
     date: '',
     start_time: '08:00',
-    end_time: '',
-    mealtime: '',
+    end_time: '10:30',
+    mealtime: 'Frühstück',
     groupSize: 5,
     cateringArt: 'fingerfood',
-    service: '',
-    drinks: 'nein',
+    service: 'nein',
+    drinks: 'nein', // nötig?
     drinksMenu: [],
-    personen: '',
+    geschirr: 'nein',
+    meal: [],
+
     stehpulteCount: 0,
-    notice_content: '',
 
   });
 
@@ -60,26 +61,16 @@ const Form = () => {
       setFormData({
         ...formData,
         [name]: value,
+
       });
+      console.log(value, formData);
     }
   };
-  
+
 
   // Funktion zum Berechnen des Preises basierend auf den ausgewählten Optionen
   const calculatePrice = () => {
-    // Hier können Sie Ihre Preisberechnung durchführen, basierend auf formData
-    // Beispiel: Angenommen, der Grundpreis beträgt 10 Euro pro Person
-    // und es gibt 3 ausgewählte Gerichte im Menü (pro Person 3 Euro)
-    // und für Service vor Ort gibt es einen Aufpreis von 50 Euro.
-    // Der Preis könnte wie folgt berechnet werden:
 
-    // const basicPricePerPerson = 10;
-    // const selectedMealsPrice = formData.meal.length * 3; // Annahme, dass jedes Gericht 3 Euro kostet
-    // const servicePrice = formData.service === 'ja' ? 50 : 0;
-    // const groupSize = parseInt(formData.groupSize);
-    // const totalPrice = basicPricePerPerson * groupSize + selectedMealsPrice + servicePrice;
-
-    // setPrice(totalPrice);
   };
 
   // Effekt zum Aktualisieren des Preises, wenn sich die Formulardaten ändern
@@ -101,10 +92,6 @@ const Form = () => {
     handleChange(e);
   };
 
-  // Hier können Sie den Rest der Formular-Komponente erstellen
-  // und die entsprechenden Eingabefelder für das Formular hinzufügen.
-  // Nutzen Sie die State-Variablen formData, groupSizeVisible und drinksVisible,
-  // um die Anzeige der Eingabefelder zu steuern.
 
   const setTimeout = (e) => {
     var dateParts = e.value.split('-');
@@ -133,136 +120,75 @@ const Form = () => {
 
 
 
-  // ------------------------COMPONENTS---------------------------
-
-  const MealtimeRadioGroup = () => {
-    return (
-      <div className="card text-white bg-primary mb-4" style={{ maxWidth: '18rem' }}>
-        <div className="card-header">Uhrzeit</div>
-        <div className="card-body">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="mealtime"
-              id="frühstückradio"
-              value="Frühstück"
-              checked={formData.mealtime === 'Frühstück'}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="frühstückradio">
-              Frühstück
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="mealtime"
-              id="mittagRadio"
-              value="Mittag"
-              checked={formData.mealtime === 'Mittag'}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="mittagRadio">
-              Mittagessen
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="mealtime"
-              id="abendradio"
-              value="Abendessen"
-              checked={formData.mealtime === 'Abendessen'}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="abendradio">
-              Abendessen
-            </label>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-
-
-  const CateringGroupInput = () => {
-    return (
-      <div id="cateringGroupContainer">
-        <label htmlFor="cateringGroup" style={{ textAlign: 'center' }}>
-          Catering Gruppe
-        </label>
-        <input
-          type="number"
-          id="cateringGroup"
-          name="cateringGroup"
-          min="5"
-          max="100"
-          value={formData.groupSize}
-          onChange={handleChange}
-        />
-      </div>
-    );
-  };
-
-
-
-
-
-
-
-
-
-
-
   // return HTML (jsx) ------------------------------
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="date" style={{ textAlign: 'center' }}>
-          Datum:
-        </label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          value={formData.date}
-          onChange={(e) => {
+      <div className='sub-container'>
+        <div className='date-and-time' >
+          <label htmlFor="date" style={{background:'#4e3022', textAlign: 'center' }}>
+            Datum:
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={formData.date}
+            onChange={(e) => {
+              const newValue = e.target.value; // Capture the event value
+
+              handleChange(e); // Call the first function with the event
+              setTimeout({ value: newValue });
+            }
+            }
+            required
+          />
+
+
+          <label htmlFor="start_time" style={{backgroundColor:'#4e3022', textAlign: 'center' }}>
+            Beginn:
+          </label>
+          <input type="time" id="start_time" name="start_time" min="09:00" max="18:00" value={formData.start_time} onChange={(e) => {
             const newValue = e.target.value; // Capture the event value
 
             handleChange(e); // Call the first function with the event
-            setTimeout({ value: newValue });
-          }
-          }
-          required
-        />
-      </div>
-      <br />
-      <MealtimeRadioGroup />
-      <CateringGroupInput />
 
-      <div className='infoContainer'>
-        <div className='infoSubContainer'>
-          <strong>Für eine Gruppengröße von 5-20 Personen</strong>
-          <small>Können 2 Gerichte ausgewählt werden</small>
+          }} required />
+          <label htmlFor="end_time" style={{backgroundColor:'#4e3022', textAlign: 'center' }}>
+            Ende:
+          </label>
+          <input type="time" id="end_time" name="end_time" min="09:00" max="18:00" value={formData.end_time} onChange={(e) => {
+            const newValue = e.target.value; // Capture the event value
+
+            handleChange(e); // Call the first function with the event
+
+          }} required />
         </div>
-        <div className='infoSubContainer'>
-          <strong>Für eine Gruppengröße von 5-20 Personen</strong>
-          <small>Können 2 Gerichte ausgewählt werden</small>
+        <br />
+        {/* <MealtimeRadioGroup handleChange={handleChange} formData={formData} /> */}
+        <CateringGroupInput handleChange={handleChange} formData={formData} />
+
+        <div className='card info-card' style={{marginTop: '20px', overflow: 'hidden'}}>
+          <div className='card-header'> INFO </div>
+          <div className='card-body'>
+            <strong>Für eine Gruppengröße von 5-20 Personen</strong>
+            <br />
+            <small>Können 2 Gerichte pro Kategorie ausgewählt werden</small>
+          </div>
+          <div className='card-body'>
+            <strong>Für eine Gruppengröße von 21+ Personen</strong>
+            <br />
+            <small>Können 3 Gerichte pro Kategorie ausgewählt werden</small>
+          </div>
         </div>
       </div>
-      <CateringArt handleChange={handleChange} />
+      <CateringArt handleChange={handleChange} formData={formData} />
       {/* Continue with the rest of the form elements */}
-      {/* <div>
-        <TimePicker 
-        value={formData.start_time}
-        onChange={(value) => handleChange({ target: { name: 'start_time', value } })}  />
-      </div> */}
+      <div className='sub-container' style={{width: '417px'}}>
+      <Auststattung handleChange={handleChange} formData={formData} />
+
 
       <button type="submit">Submit</button>
+      </div>
     </form>
   );
 };
