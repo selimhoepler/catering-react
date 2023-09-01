@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CateringArt from './form_components/CateringArt';
-import { MealtimeRadioGroup, CateringGroupInput, Auststattung } from './form_components/minor_components';
+import { MealtimeRadioGroup, CateringGroupInput, Auststattung, BasicExampple } from './form_components/minor_components';
+import Contact from './form_components/contact/Contact';
+import Button from 'react-bootstrap/Button';
 
 const Form = () => {
   // State für die Formular-Daten
@@ -9,36 +11,35 @@ const Form = () => {
     date: '',
     start_time: '08:00',
     end_time: '10:30',
-    mealtime: 'Frühstück',
     groupSize: 5,
     cateringArt: 'fingerfood',
-    service: 'nein',
+    service: false,
     drinks: 'nein', // nötig?
-    drinksMenu: [],
-    geschirr: 'nein',
+    drinks: [],
+    Geschirr: false,
     meal: [],
-
+    Stehpulte: false,
     stehpulteCount: 0,
 
   });
+
+
 
   const handleSubmit = (e) => {
     alert(JSON.stringify(formData));
     return
   }
 
-  // State für den Preis
+  // State für den Preis, Preis de Formular auf Submit übergeben (!)
   const [price, setPrice] = useState(0);
 
-  // State für die Anzeige der Gerichte basierend auf der Gruppengröße
-  const [groupSizeVisible, setGroupSizeVisible] = useState(false);
 
-  // State für die Anzeige der Getränkeauswahl basierend auf der Auswahl "Ja" oder "Nein"
-  const [drinksVisible, setDrinksVisible] = useState(false);
 
   // Funktion zum Aktualisieren der Formular-Daten
   const handleChange = (e) => {
+
     const { name, value, type, checked } = e.target;
+    const category = e.target.getAttribute('category'); // Holen Sie sich das category-Attribut, wenn es existiert
     if (type === 'checkbox') {
       // Überprüfe, ob formData[name] ein Array ist
       if (Array.isArray(formData[name])) {
@@ -54,43 +55,137 @@ const Form = () => {
         // Wenn es kein Array ist, setze den Wert als einzelnes Element-Array
         setFormData({
           ...formData,
-          [name]: checked ? [value] : [],
+          [name]: checked,
         });
       }
+      console.log(value, formData);
     } else {
       setFormData({
         ...formData,
         [name]: value,
-
       });
+      console.log(name, value)
       console.log(value, formData);
     }
   };
 
 
+
+
+  const handleClearMeal = () => {
+    setFormData({
+      ...formData,
+      meal: [],
+      drinks: [],
+    });
+  };
+
   // Funktion zum Berechnen des Preises basierend auf den ausgewählten Optionen
-  const calculatePrice = () => {
+  const calculatePrice = (indicator) => {
+
+    var groupSize = formData.groupSize;
+
+    var pricePerPerson;
+    var geschirrTischKosten = 0;
+    var hussenKosten = 0;
+    var transportKosten;
+
+    var price = 0;
+
+
+
+
+
+    pricePerPerson = updateGruppenKosten();
+    transportKosten = updateTransportKosten();
+    geschirrTischKosten = updateGeschirrTischKosten();
+    hussenKosten = updateHussenKosten();
+
+
+    price = (pricePerPerson * groupSize) + geschirrTischKosten + hussenKosten + transportKosten;
+    // console.log("price= ", pricePerPerson, "*", groupSize, "+", geschirrTischKosten, "+", hussenKosten, "+", transportKosten);
+
+    return price;
 
   };
 
   // Effekt zum Aktualisieren des Preises, wenn sich die Formulardaten ändern
   useEffect(() => {
-    calculatePrice();
+    var tempPrice = calculatePrice("useEffect");
+    setPrice(tempPrice);
+    // setFormData({
+    //   ...formData,
+    //   preis: price,
+    // });
   }, [formData]);
 
-  // Funktion zum Anzeigen oder Ausblenden der Gruppengröße basierend auf der Catering-Gruppe
-  const handleCateringGroupChange = (e) => {
-    const selectedValue = parseInt(e.target.value);
-    setGroupSizeVisible(selectedValue >= 5 && selectedValue <= 20);
-    handleChange(e);
-  };
 
-  // Funktion zum Anzeigen oder Ausblenden der Getränkeauswahl basierend auf der Getränkeauswahl
-  const handleDrinksChange = (e) => {
-    const selectedValue = e.target.value;
-    setDrinksVisible(selectedValue === 'ja');
-    handleChange(e);
-  };
+  function updateTransportKosten() {
+    var groupSize = formData.groupSize;
+    var transportKosten = 0;
+
+    if (groupSize <= 20) {
+      transportKosten = 40;
+    } else {
+      transportKosten = 60;
+    }
+
+    return transportKosten;
+  }
+
+  function updateGruppenKosten() {
+    var groupSize = formData.groupSize;
+    var pricePerPerson = 0;
+
+    if (groupSize >= 0 && groupSize <= 20) {
+      pricePerPerson = 11;
+    } else if (groupSize >= 21 && groupSize <= 40) {
+      pricePerPerson = 10;
+
+    } else if (groupSize >= 41 && groupSize <= 60) {
+      pricePerPerson = 9;
+
+    } else if (groupSize >= 61 && groupSize <= 80) {
+      pricePerPerson = 8;
+
+    } else {
+      pricePerPerson = 0;
+    }
+    return pricePerPerson;
+
+  }
+
+  function updateGeschirrTischKosten() {
+
+    var groupSize = formData.groupSize;
+    var geschirrTischKosten = 0;
+
+    if (formData.Geschirr) {
+
+      if (groupSize >= 1 && groupSize <= 20) {
+        geschirrTischKosten = 45 + 10;  // UPDATE SELIM: added transportCosts 
+      } else if (groupSize >= 21 && groupSize <= 40) {
+        geschirrTischKosten = 65 + 20;  // UPDATE SELIM: added transportCosts
+      } else if (groupSize >= 41 && groupSize <= 60) {
+        geschirrTischKosten = 85;
+      } else if (groupSize >= 61 && groupSize <= 80) {
+        geschirrTischKosten = 110;
+      }
+    }
+    return geschirrTischKosten;
+  }
+
+  function updateHussenKosten() {
+    var stehpulteCount = formData.stehpulteCount;
+    var Stehpulte = formData.Stehpulte;
+    var hussenKosten = 0;
+
+    if (Stehpulte) {
+      hussenKosten = stehpulteCount * 5;
+    }
+    return hussenKosten;
+
+  }
 
 
   const setTimeout = (e) => {
@@ -117,6 +212,12 @@ const Form = () => {
     }
   };
 
+  const toggleOverlay = () => {
+    const overlay = document.querySelector('.my-overlay');
+    overlay.classList.toggle('active');
+
+  };
+
 
 
 
@@ -125,7 +226,7 @@ const Form = () => {
     <form onSubmit={handleSubmit}>
       <div className='sub-container'>
         <div className='date-and-time' >
-          <label htmlFor="date" style={{background:'#4e3022', textAlign: 'center' }}>
+          <label htmlFor="date" style={{ marginBottom: '0px', marginTop: '10px' }}>
             Datum:
           </label>
           <input
@@ -144,7 +245,7 @@ const Form = () => {
           />
 
 
-          <label htmlFor="start_time" style={{backgroundColor:'#4e3022', textAlign: 'center' }}>
+          <label htmlFor="start_time" style={{ marginBottom: '0px', marginTop: '10px' }}>
             Beginn:
           </label>
           <input type="time" id="start_time" name="start_time" min="09:00" max="18:00" value={formData.start_time} onChange={(e) => {
@@ -153,7 +254,7 @@ const Form = () => {
             handleChange(e); // Call the first function with the event
 
           }} required />
-          <label htmlFor="end_time" style={{backgroundColor:'#4e3022', textAlign: 'center' }}>
+          <label htmlFor="end_time" style={{ marginBottom: '0px', marginTop: '10px' }}>
             Ende:
           </label>
           <input type="time" id="end_time" name="end_time" min="09:00" max="18:00" value={formData.end_time} onChange={(e) => {
@@ -167,7 +268,7 @@ const Form = () => {
         {/* <MealtimeRadioGroup handleChange={handleChange} formData={formData} /> */}
         <CateringGroupInput handleChange={handleChange} formData={formData} />
 
-        <div className='card info-card' style={{marginTop: '20px', overflow: 'hidden'}}>
+        <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
           <div className='card-header'> INFO </div>
           <div className='card-body'>
             <strong>Für eine Gruppengröße von 5-20 Personen</strong>
@@ -181,13 +282,40 @@ const Form = () => {
           </div>
         </div>
       </div>
-      <CateringArt handleChange={handleChange} formData={formData} />
+      <CateringArt handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} />
       {/* Continue with the rest of the form elements */}
-      <div className='sub-container' style={{width: '417px'}}>
-      <Auststattung handleChange={handleChange} formData={formData} />
+      <div className='sub-container' style={{ width: '417px' }}>
+        <Auststattung handleChange={handleChange} formData={formData} />
 
 
-      <button type="submit">Submit</button>
+
+
+        <div className='card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
+          <div className='card-header'> PREIS </div>
+          <div className='card-body'>
+            <small>Der aktuelle Preis beträgt:</small>
+            <br />
+            <strong>{price} Euro</strong>
+
+
+          </div>
+        </div>
+
+        <Button onClick={toggleOverlay}>
+          Weiter
+        </Button>
+      </div>
+      <div className="my-overlay" >
+        <div className='overlay-content-container'>
+        <div className='contact-container'>
+        <Contact />
+        
+        <button type="submit">Submit</button>
+        </div>
+        <div className='close-btn-container'>
+         <input type="image" className='close-img' src="https://img.icons8.com/?size=512&id=71200&format=png" alt="close" onClick={toggleOverlay} />
+        </div>
+        </div>
       </div>
     </form>
   );

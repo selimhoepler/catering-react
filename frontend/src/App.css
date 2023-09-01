@@ -56,12 +56,13 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  padding-top: 100px;
   box-sizing: border-box;
   overflow: auto;
   height: 100%;
   /* Enable scrolling on the whole page */
 
-  /* background-image: url("N:\Selim\Github\catering-new\menu\static\menu\cateringNEW.jpg"); */
+  background-image: url("N:\Selim\Github\catering-new\menu\static\menu\cateringNEW.jpg");
   /*  TODO: copy final path */
   background-color: #ffffff;
   background-size: cover;
@@ -94,7 +95,6 @@ h3 {
 
 
 form {
-  margin-top: 20px;
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -158,11 +158,12 @@ button[type="submit"]:hover {
 .card {
   background-color: #f3a476;
 
-  border-radius: 5px;
+  border-radius: 0px !important;
   /* color: #FFF; */
   padding: 20px;
   margin-bottom: 20px;
   transition: 2s;
+  border: none !important;
 }
 
 .card-title {
@@ -310,9 +311,9 @@ button[type="submit"]:hover {
   border-radius: 5px;
   border-radius: 0px;
   background: #ffffff;
-  box-shadow:  20px 20px 60px #d9d9d9,
-               -20px -20px 60px #ffffff;
-  padding: 10px;
+  box-shadow: 20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
+  /* padding: 10px; */
   margin-top: 10px;
   width: 100%;
   height: 100%;
@@ -337,9 +338,13 @@ button[type="submit"]:hover {
 
 .menu-selection-container {
   display: flex;
-  height:600px
+  height: 650px
 }
 
+
+.my-col-2 {
+  padding: 12px;
+}
 
 #root {
   width: 100%;
@@ -348,10 +353,10 @@ button[type="submit"]:hover {
   justify-content: center;
 }
 
-.sub-container{
+.sub-container {
   display: flex;
   flex-direction: column;
-  padding:20px;
+  padding: 20px;
   padding-top: 67px;
 
 }
@@ -360,68 +365,128 @@ button[type="submit"]:hover {
 .info-card {
   width: 350px;
   margin-right: 10px;
+
 }
 
-.date-and-time{
-  display: flex; 
+.date-and-time {
+  display: flex;
   flex-direction: column;
   border-bottom: solid 1px #403735;
   padding-bottom: 40px;
 }
 
-.checkbox-container{
+.checkbox-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  padding-top: 0px;
   border-left: 1px solid #403735;
   width: 100%;
   transition: height 0.3s ease-in;
 }
 
-.card{
+.card {
   overflow: auto;
+
+}
+
+.shadowy {
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #d9d9d9,
+    -20px -20px 60px #ffffff;
 }
 
 .nav-pills {
   --bs-nav-pills-border-radius: 0px !important;
   --bs-nav-pills-link-active-color: #fff !important;
-  --bs-nav-pills-link-active-bg: #e75012 !important;
-  --bs-nav-link-color: #e75012 !important;
+  /* --bs-nav-pills-link-active-bg: #00000000 !important; */
+  --bs-nav-link-color: #fff !important;
   --bs-nav-link-hover-color: #fff !important;
+
 
 }
 
-.nav-pills .nav-link{
+.nav-pills .nav-link {
   font-size: x-large;
   font-weight: bold;
   text-align: center;
   vertical-align: middle;
 }
 
-.nav-item{
-  transition: all 0.15s ease-in-out;
-  flex:1;
+.nav-item {
+  transition: all 0.1s ease-in-out;
+  flex: 1;
 }
 
-.my-col{
+.nav-link {
+  text-shadow: 0px 0px 10px #000000;
+}
+
+#nav-item-glas {
+  background-image: url("https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg?t=st=1693481873~exp=1693482473~hmac=5751f5583253f3c6766ff9782c555e09482ef6e341dfd94887d2184586a0a119");
+  background-size: cover;
+}
+
+#nav-item-bread {
+  background-image: url("https://img.freepik.com/free-photo/homemade-meat-snack-chicken-liver-pate-with-savory-olives_2829-11219.jpg?t=st=1693486101~exp=1693486701~hmac=056d9720f1522f8237eb5c11acbd156c78168a2c3d07335f2bcf1260f4ce9551");
+  background-size: cover;
+}
+
+#nav-item-starters {
+  background-image: url("https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg?t=st=1693481873~exp=1693482473~hmac=5751f5583253f3c6766ff9782c555e09482ef6e341dfd94887d2184586a0a119");
+  background-size: cover;
+}
+
+#nav-item-main {
+  background-image: url("https://img.freepik.com/free-photo/juicy-steak-medium-rare-beef-with-spices-grilled-vegetables_2829-18672.jpg?t=st=1693481873~exp=1693482473~hmac=32ba1310e9786a06ded1564fae7aa15ec18ac8618baa177e3ea643153705e82b");
+  background-size: cover;
+}
+
+#nav-item-salad {
+  background-image: url("https://img.freepik.com/free-photo/salad-from-tomatoes-cucumber-red-onions-lettuce-leaves-healthy-summer-vitamin-menu-vegan-vegetable-food-vegetarian-dinner-table-top-view-flat-lay_2829-6482.jpg?t=st=1693481873~exp=1693482473~hmac=268ccd81e1f20a440b9c0cc6ff2ae183ff4c2a2e17a3f8f6ff125a88be99a29e");
+  background-size: cover;
+}
+
+#nav-item-dessert {
+  background-image: url("https://img.freepik.com/free-photo/tart-with-strawberries-whipped-cream-decorated-with-mint-leaves-top-view_2829-19973.jpg?t=st=1693484032~exp=1693484632~hmac=a14c9d309f0a1465885949ccc0c8a94e4bd28c9af47b58b98c98b9264c13b1c0");
+  background-size: cover;
+}
+
+#nav-item-drinks {
+  background-image: url("https://img.freepik.com/free-photo/front-close-view-organic-fresh-juices-bottles-served-with-tubes-fruits-wooden-cutting-board-brown-table_140725-94487.jpg?t=st=1693481873~exp=1693482473~hmac=567254d1bbc9785ec77752789a8803e672e5a6edfaa28dd113ddbf8b0addb619");
+  background-size: cover;
+}
+
+.my-col {
   background-color: #4e3022;
-   border-right: 1px solid #403735;
-   padding: 0px !important;
-}
-.nav-item a{
-  height:100%;
-  display: flex;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: center;
+  border-right: 1px solid #403735;
+  padding: 0px !important;
 }
 
-.nav-item:hover{
+.nav-item a {
+  height: 100%;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #00000094;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: #00000000 !important;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #00000000 !important;
+}
+
+
+.nav-item:hover {
   background-color: #e75012 !important;
 }
 
-.menu-card{
+.menu-card {
   margin-right: 10px;
   border: none !important;
   border-right: 1px solid #403735 !important;
@@ -429,24 +494,39 @@ button[type="submit"]:hover {
 }
 
 
-.my-button-active{
+.my-button-active {
   background-color: #e75012 !important;
   color: #fff !important;
   border-radius: 0px !important;
   border-color: #E75012 !important;
 }
 
-.my-button-inactive{
+.my-button-inactive {
   background-color: #fff !important;
   color: #e75012 !important;
   border-color: #E75012 !important;
   border-radius: 0px !important;
 }
 
-.my-button-inactive:hover{
+.my-button-inactive:hover {
   background-color: #e75012 !important;
   color: #fff !important;
 }
+
+
+.food-choice-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #403735;
+}
+
+.food-choice-cont label {
+  width: 80%;
+  padding-left: 5px;
+
+}
+
 
 
 /* ------------------------ SCrollbar ------------------------ */
@@ -454,21 +534,302 @@ button[type="submit"]:hover {
 ::-webkit-scrollbar {
   width: 6px;
 
-}  
+}
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #ffffff;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #4e3022; 
+  background: #4e302267;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #4e3022b7; 
+  background: #4e3022b7;
+}
+
+
+
+
+
+
+/* ------------------------ checkbox ------------------------ */
+
+/* checkbox settings 👇 */
+
+
+
+.ui-checkbox {
+  --primary-color: #1677ff;
+  --secondary-color: #fff;
+  --primary-hover-color: #403735;
+  /* checkbox */
+  --checkbox-diameter: 15px;
+  --checkbox-border-radius: 5px;
+  --checkbox-border-color: #d9d9d9;
+  --checkbox-border-width: 1px;
+  --checkbox-border-style: solid;
+  /* checkmark */
+  --checkmark-size: 1.2;
+}
+
+.ui-checkbox,
+.ui-checkbox *,
+.ui-checkbox *::before,
+.ui-checkbox *::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ui-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: var(--checkbox-diameter);
+  height: var(--checkbox-diameter);
+  border-radius: var(--checkbox-border-radius);
+  background: #f7f7f7;
+  border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.15s;
+  cursor: pointer;
+  position: relative;
+}
+
+.ui-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  border-radius: inherit;
+  opacity: 0;
+  -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.ui-checkbox::before {
+  top: 40%;
+  left: 50%;
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  border-right: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  opacity: 0;
+  -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
+  -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
+}
+
+/* actions */
+
+.ui-checkbox:hover {
+  border-color: var(--primary-hover-color);
+}
+
+.ui-checkbox:checked {
+  background: var(--primary-color);
+  border-color: transparent;
+}
+
+.ui-checkbox:checked::before {
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -webkit-transition: all 0.1s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  -o-transition: all 0.1s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  transition: all 0.1s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+}
+
+.ui-checkbox:active:not(:checked)::after {
+  -webkit-transition: none;
+  -o-transition: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  opacity: 1;
+}
+
+
+.off {
+  background: #e6e6e6 !important;
+}
+
+.off:hover {
+  border-color: #d9d9d9;
+  cursor: default;
+}
+
+
+
+
+
+
+
+/* ------------------------ contact ------------------------ */
+
+
+
+.my-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Hintergrundfarbe mit Transparenz für den Blur-Effekt */
+  backdrop-filter: blur(5px);
+  /* Blur-Effekt */
+  z-index: 1000;
+  /* Z-Index, um das Overlay über allem anderen zu platzieren */
+  justify-content: center;
+  align-items: center;
+}
+
+.my-overlay.active {
+  display: flex;
+  flex-direction: row;
+}
+
+.overlay-content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  width: 100%;
+  height: fit-content
+}
+
+.contact-container {
+  width: 1200px;
+  height: fit-content;
+  background-color: #ffffff;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #d9d9d95c,
+    -20px -20px 60px #ffffff8c;
+
+}
+
+.close-img {
+  height: 50px;
+  width: 50px;
+
+}
+
+.close-btn-container {}
+
+
+.my-button {
+  display: block;
+  width: 100%;
+  background-color: #e14;
+  border: none;
+  border-radius: 3px;
+  padding: 1ch;
+  font-size: 1rem;
+  color: #fff;
+  font-family: inherit;
+}
+
+.my-text-input {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.my-text-input label {
+  position: absolute;
+  top: 1ch;
+  left: 1ch;
+  padding: 0 0.5ch;
+  pointer-events: none;
+  transition: 150ms ease;
+  color: #888;
+}
+
+.my-text-input label.label-focus {
+  position: absolute;
+  top: 0;
+  font-size: 0.9em;
+  color: #e14;
+  font-weight: bold;
+  transform: translateY(-50%);
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.my-text-input input {
+  display: block;
+  width: 100%;
+  border: 2px solid #eee;
+  padding: 1ch;
+  border-radius: 3px;
+  transition: 150ms ease;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.my-text-input input.input-focus {
+  border-color: #e14;
+}
+
+.my-text-area {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.my-text-area label {
+  position: absolute;
+  top: 1ch;
+  left: 1ch;
+  padding: 0 0.5ch;
+  pointer-events: none;
+  transition: 150ms ease;
+  color: #888;
+}
+
+.my-text-area label.label-focus {
+  position: absolute;
+  top: 0;
+  font-size: 0.9em;
+  color: #e14;
+  font-weight: bold;
+  transform: translateY(-50%);
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.my-text-area textarea {
+  display: block;
+  width: 100%;
+  border: 2px solid #eee;
+  padding: 1ch;
+  border-radius: 3px;
+  transition: 150ms ease;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+  height: 8em;
+}
+
+.my-text-area textarea.input-focus {
+  border-color: #e14;
 }

@@ -319,7 +319,7 @@ const checkMaxMeals = (id, groupSize) => {
     console.log(id, groupSize);
     var maxMeals = 3;
 
-    if (groupSize < 20 ){
+    if (groupSize < 20) {
         maxMeals = 2;
     } else {
         maxMeals = 3;
@@ -327,17 +327,20 @@ const checkMaxMeals = (id, groupSize) => {
 
     const container = document.getElementById(id);
     const checkedMeals = container.querySelectorAll('input[name="meal"]:checked');
-    if (checkedMeals.length >= maxMeals) {;
+    if (checkedMeals.length >= maxMeals) {
+        ;
         const allMeals = container.querySelectorAll('input[name="meal"]');
         allMeals.forEach((mealCheckbox) => {
             if (!mealCheckbox.checked) {
                 mealCheckbox.disabled = true;
+                mealCheckbox.classList.add('off');
             }
-    });
+        });
     } else {
         const allMeals = container.querySelectorAll('input[name="meal"]');
         allMeals.forEach((mealCheckbox) => {
             mealCheckbox.disabled = false;
+            mealCheckbox.classList.remove('off');
         });
     }
 
@@ -351,19 +354,24 @@ const HauptspeisenContainer = ({ handleChange, formData }) => {
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
                     {categoryItem.dishes.map((dish) => (
-                        <label key={dish}>
+                        <div className='food-choice-cont' key={dish} >
+                            
                             <input
                                 type="checkbox"
+                                className='ui-checkbox'
                                 name="meal"
                                 value={dish}
+                                category={categoryItem.category}
                                 onChange={e => {
                                     checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
                                     handleChange(e);
                                 }
                                 }
                             />
+                            <label key={dish} >
                             {dish}
                         </label>
+                        </div>
                     ))}
                 </div>
             ))}
@@ -377,19 +385,23 @@ const BroetchenContainer = ({ handleChange, formData }) => {
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
                     {categoryItem.dishes.map((dish) => (
-                        <label key={dish}>
-                            <input
-                                type="checkbox"
-                                name="meal"
-                                value={dish}
-                                onChange={e => {
-                                    checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
-                                    handleChange(e);
-                                }
-                                }
-                            />
-                            {dish}
-                        </label>
+                        <div className='food-choice-cont' key={dish} >
+                            
+                        <input
+                            type="checkbox"
+                            className='ui-checkbox'
+                            name="meal"
+                            value={dish}
+                            onChange={e => {
+                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                handleChange(e);
+                            }
+                            }
+                        />
+                        <label key={dish} >
+                        {dish}
+                    </label>
+                    </div>
                     ))}
                 </div>
             ))}
@@ -405,19 +417,23 @@ const VorspeisenContainer = ({ handleChange, formData }) => {
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
                     {categoryItem.dishes.map((dish) => (
-                        <label key={dish}>
-                            <input
-                                type="checkbox"
-                                name="meal"
-                                value={dish}
-                                onChange={e => {
-                                    checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
-                                    handleChange(e);
-                                }
-                                }
-                            />
-                            {dish}
-                        </label>
+                        <div className='food-choice-cont' key={dish} >
+                            
+                        <input
+                            type="checkbox"
+                            className='ui-checkbox'
+                            name="meal"
+                            value={dish}
+                            onChange={e => {
+                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                handleChange(e);
+                            }
+                            }
+                        />
+                        <label key={dish} >
+                        {dish}
+                    </label>
+                    </div>
                     ))}
                 </div>
             ))}
@@ -432,19 +448,23 @@ const FingerfoodContainer = ({ handleChange, formData }) => {
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
                     {categoryItem.dishes.map((dish) => (
-                        <label key={dish}>
-                            <input
-                                type="checkbox"
-                                name="meal"
-                                value={dish}
-                                onChange={e => {
-                                    checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
-                                    handleChange(e);
-                                }
-                                }
-                            />
-                            {dish}
-                        </label>
+                        <div className='food-choice-cont' key={dish} >
+                            
+                        <input
+                            type="checkbox"
+                            className='ui-checkbox'
+                            name="meal"
+                            value={dish}
+                            onChange={e => {
+                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                handleChange(e);
+                            }
+                            }
+                        />
+                        <label key={dish} >
+                        {dish}
+                    </label>
+                    </div>
                     ))}
                 </div>
             ))}
@@ -459,20 +479,23 @@ const SalatContainer = ({ handleChange, formData }) => {
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
                     {categoryItem.dishes.map((dish) => (
-                        <label key={dish}>
-                            <input
-                                type="checkbox"
-                                name="meal"
-                                value={dish}
-                                onChange={e => {
-                                    checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
-                                    handleChange(e);
-                                }
-                                }
-
-                            />
-                            {dish}
-                        </label>
+                        <div className='food-choice-cont' key={dish} >
+                            
+                        <input
+                            type="checkbox"
+                            className='ui-checkbox'
+                            name="meal"
+                            value={dish}
+                            onChange={e => {
+                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                handleChange(e);
+                            }
+                            }
+                        />
+                        <label key={dish} >
+                        {dish}
+                    </label>
+                    </div>
                     ))}
                 </div>
             ))}
@@ -487,20 +510,23 @@ const DesserContainer = ({ handleChange, formData }) => {
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
                     {categoryItem.dishes.map((dish) => (
-                        <label key={dish}>
-                            <input
-                                type="checkbox"
-                                name="meal"
-                                value={dish}
-                                onChange={e => {
-                                    checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
-                                    handleChange(e);
-                                }
-                                }
-
-                            />
-                            {dish}
-                        </label>
+                        <div className='food-choice-cont' key={dish} >
+                            
+                        <input
+                            type="checkbox"
+                            className='ui-checkbox'
+                            name="meal"
+                            value={dish}
+                            onChange={e => {
+                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                handleChange(e);
+                            }
+                            }
+                        />
+                        <label key={dish} >
+                        {dish}
+                    </label>
+                    </div>
                     ))}
                 </div>
             ))}
@@ -515,16 +541,20 @@ const GetraenkeContainer = ({ handleChange }) => {
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
                     {categoryItem.dishes.map((dish) => (
-                        <label key={dish}>
-                            <input
-                                type="checkbox"
-                                name="drinksMenu"
-                                value={dish}
-                                onChange={handleChange}
-
-                            />
-                            {dish}
-                        </label>
+                        <div className='food-choice-cont' key={dish} >
+                            
+                        <input
+                            type="checkbox"
+                            className='ui-checkbox'
+                            name="drinks"
+                            value={dish}
+                            onChange={handleChange
+                            }
+                        />
+                        <label key={dish} >
+                        {dish}
+                    </label>
+                    </div>
                     ))}
                 </div>
             ))}
