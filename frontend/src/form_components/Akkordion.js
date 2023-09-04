@@ -316,7 +316,6 @@ const getraenkBuffet = [
 
 const checkMaxMeals = (id, groupSize) => {
 
-    console.log(id, groupSize);
     var maxMeals = 3;
 
     if (groupSize < 20) {
@@ -329,6 +328,32 @@ const checkMaxMeals = (id, groupSize) => {
     const checkedMeals = container.querySelectorAll('input[name="meal"]:checked');
     if (checkedMeals.length >= maxMeals) {
         ;
+        if (maxMeals === 2) {
+            const warnung = document.getElementById('zwei-gerichte');
+            warnung.style.transition = 'all 0.5s';
+            warnung.style.transform = 'scale(1.1)';
+            warnung.style.color = 'red';
+
+    
+            // Hier wird der Stil nach 2 Sekunden zurückgesetzt
+            setTimeout(() => {
+                warnung.style.transform = 'scale(1.0)';
+                warnung.style.color = 'initial'; // Zurück zum ursprünglichen Farbwert
+            }, 1000);
+
+        } else {
+            const warnung = document.getElementById('drei-gerichte');
+            warnung.style.transition = 'all 0.5s';
+            warnung.style.transform = 'scale(1.1)';
+            warnung.style.color = 'red';
+
+    
+            // Hier wird der Stil nach 2 Sekunden zurückgesetzt
+            setTimeout(() => {
+                warnung.style.transform = 'scale(1.0)';
+                warnung.style.color = 'initial'; // Zurück zum ursprünglichen Farbwert
+            }, 1000);
+        }
         const allMeals = container.querySelectorAll('input[name="meal"]');
         allMeals.forEach((mealCheckbox) => {
             if (!mealCheckbox.checked) {

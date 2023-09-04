@@ -60,12 +60,15 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
+    'django.middleware.common.CommonMiddleware',
+
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'catering.urls'
@@ -148,9 +151,29 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
+     'http://localhost:3000',
+     'http://192.168.50.125:3000 '
+]
+
+CORS_ALLOW_ORIGINS = [
+    "localhost:3000", 
+     'http://192.168.50.125:3000 ' # Füge hier die Adresse deines Frontend-Servers hinzu
+    # Weitere vertrauenswürdige Ursprünge hier hinzufügen, wenn benötigt
 ]
 
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000",
+                        'http://192.168.50.125:3000' ]
+
+CSRF_FAILURE_VIEW = 'menu.views.custom_csrf_failure'
+
+
+CSRF_COOKIE_DOMAIN = 'http://192.168.50.125:3000 '
+
+CSRF_COOKIE_NAME = "csrftoken"
+CSRF_COOKIE_SECURE = False  # Im Entwicklungsmodus auf False setzen
+CSRF_COOKIE_HTTPONLY = False  # Im Entwicklungsmodus auf False setzen

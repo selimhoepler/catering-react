@@ -24,11 +24,81 @@ const Form = () => {
   });
 
 
+  
+const API_HOST = 'http://127.0.0.1:8000/';
 
-  const handleSubmit = (e) => {
-    alert(JSON.stringify(formData));
-    return
+let _csrfToken = null;
+
+async function getCsrfToken() {
+  if (_csrfToken === null) {
+    const response = await fetch(`${API_HOST}/csrf/`, {
+      credentials: 'include',
+    });
+    const data = await response.json();
+    _csrfToken = data.csrfToken;
   }
+  return _csrfToken;
+}
+
+
+
+  function getCookie(name) {
+    const _csrfToken = getCsrfToken();
+
+
+    const value = `; ${_csrfToken}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+
+  const submitDataToBackend = async (formData, contactData) => {
+    try {
+      // Hier Axios oder Fetch verwenden, um die Daten an das Backend zu senden
+      // const response = await axios.post('/api/your-endpoint', {
+      //   formData,
+      //   contactData,
+      // });
+
+      setFormData({
+        ...formData,
+        preis: price,
+      });
+
+      console.log(formData, contactData);
+      const data = { formData, contactData };
+
+      const csrfToken = await getCsrfToken();
+      console.log(csrfToken);
+
+      fetch('http://127.0.0.1:8000/generate-pdf/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+        },
+        body: JSON.stringify(data),
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          // Create a temporary anchor element to trigger the download
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'booking.pdf';
+          a.click();
+          window.URL.revokeObjectURL(url);
+    
+          // Redirect to the success page
+          
+        }); // Hier kannst du die Antwort des Backends verarbeiten
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
 
   // State für den Preis, Preis de Formular auf Submit übergeben (!)
   const [price, setPrice] = useState(0);
@@ -40,6 +110,7 @@ const Form = () => {
 
     const { name, value, type, checked } = e.target;
     const category = e.target.getAttribute('category'); // Holen Sie sich das category-Attribut, wenn es existiert
+    console.log(category);
     if (type === 'checkbox') {
       // Überprüfe, ob formData[name] ein Array ist
       if (Array.isArray(formData[name])) {
@@ -47,17 +118,18 @@ const Form = () => {
         const updatedValue = checked
           ? [...formData[name], value]
           : formData[name].filter((item) => item !== value);
-        setFormData({
-          ...formData,
-          [name]: updatedValue,
-        });
+        
+          setFormData({
+            ...formData,
+            [name]: updatedValue,
+          });
       } else {
         // Wenn es kein Array ist, setze den Wert als einzelnes Element-Array
         setFormData({
           ...formData,
           [name]: checked,
         });
-      }
+      };
       console.log(value, formData);
     } else {
       setFormData({
@@ -66,7 +138,7 @@ const Form = () => {
       });
       console.log(name, value)
       console.log(value, formData);
-    }
+    };
   };
 
 
@@ -213,17 +285,88 @@ const Form = () => {
   };
 
   const toggleOverlay = () => {
-    const overlay = document.querySelector('.my-overlay');
-    overlay.classList.toggle('active');
+
+    const errors = validateFields();
+    console.log(errors);
+    if (Object.keys(errors).length === 0) {
+
+      const overlay = document.getElementById('contactOverlay');
+      overlay.classList.toggle('active');
+
+
+    }
+    else {
+      const errorList = document.createElement('ul');
+      errorList.classList.add('error-list');
+
+      for (const key in errors) {
+        const errorItem = document.createElement('li');
+        errorItem.textContent = errors[key];
+        errorList.appendChild(errorItem);
+      }
+
+      const contactContainer = document.getElementById('errorContainer');
+      contactContainer.textContent = '';
+      contactContainer.appendChild(errorList);
+
+      const overlay = document.getElementById('errorsOverlay');
+      overlay.classList.toggle('active');
+    }
 
   };
+
+
+  const validateFields = () => {
+    var date = formData.date;
+    var start_time = formData.start_time;
+    var end_time = formData.end_time;
+    var groupSize = formData.groupSize;
+    var cateringArt = formData.cateringArt;
+    var meal = formData.meal;
+    var service = formData.service;
+    var drinks = formData.drinks;
+    var Geschirr = formData.Geschirr;
+    var Stehpulte = formData.Stehpulte;
+    var stehpulteCount = formData.stehpulteCount;
+    var errors = [];
+
+    var isValid = true;
+
+    if (date === '') {
+      isValid = false;
+      errors.date = "Bitte wählen Sie ein Datum.";
+
+    }
+
+    if (meal.length === 0) {
+      isValid = false;
+      errors.meal = "Sie haben nichts zu essen gewählt.";
+
+
+    }
+
+    const startTime = new Date(`2022-01-01T${start_time}:00`);
+    const startRange = new Date(`2022-01-01T09:00:00`);
+    const endRange = new Date(`2022-01-01T22:00:00`);
+
+    if (startTime < startRange || startTime > endRange) {
+      errors.start_time = 'Bitte wählen Sie eine Zeit zwischen 9:00 und 22:00 aus.';
+
+
+    }
+
+
+    return errors
+
+  }
+
 
 
 
 
   // return HTML (jsx) ------------------------------
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div className='sub-container'>
         <div className='date-and-time' >
           <label htmlFor="date" style={{ marginBottom: '0px', marginTop: '10px' }}>
@@ -270,12 +413,12 @@ const Form = () => {
 
         <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
           <div className='card-header'> INFO </div>
-          <div className='card-body'>
+          <div className='card-body' id='zwei-gerichte'>
             <strong>Für eine Gruppengröße von 5-20 Personen</strong>
             <br />
             <small>Können 2 Gerichte pro Kategorie ausgewählt werden</small>
           </div>
-          <div className='card-body'>
+          <div className='card-body' id='drei-gerichte'>
             <strong>Für eine Gruppengröße von 21+ Personen</strong>
             <br />
             <small>Können 3 Gerichte pro Kategorie ausgewählt werden</small>
@@ -305,16 +448,26 @@ const Form = () => {
           Weiter
         </Button>
       </div>
-      <div className="my-overlay" >
+      <div className="my-overlay" id='errorsOverlay' >
         <div className='overlay-content-container'>
-        <div className='contact-container'>
-        <Contact />
-        
-        <button type="submit">Submit</button>
+          <div className='contact-container' id='errorContainer'>
+            ERRORRRRRR
+          </div>
+          <div className='close-btn-container'>
+            <input type="image" className='close-img' src="https://img.icons8.com/?size=512&id=71200&format=png" alt="close" onClick={toggleOverlay} />
+          </div>
         </div>
-        <div className='close-btn-container'>
-         <input type="image" className='close-img' src="https://img.icons8.com/?size=512&id=71200&format=png" alt="close" onClick={toggleOverlay} />
-        </div>
+      </div>
+      <div className="my-overlay" id='contactOverlay' >
+        <div className='overlay-content-container'>
+          <div className='contact-container'>
+            <Contact onSubmit={submitDataToBackend} formData={formData} />
+
+
+          </div>
+          <div className='close-btn-container'>
+            <input type="image" className='close-img' src="https://img.icons8.com/?size=512&id=71200&format=png" alt="close" onClick={toggleOverlay} />
+          </div>
         </div>
       </div>
     </form>

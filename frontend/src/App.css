@@ -128,6 +128,21 @@ button[type="submit"] {
   cursor: pointer;
 
 }
+.submit-btn{
+  background-color: #ff7f50;
+  /* Orange */
+  color: #fff;
+  /* White */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.submit-btn:hover{
+  background-color: #e75e3e;
+}
 
 button[type="submit"]:hover {
   background-color: #e75e3e;
@@ -171,7 +186,7 @@ button[type="submit"]:hover {
 }
 
 .form-label {
-  color: #FFF;
+  color: #F95A00;
 }
 
 .form-control {
@@ -193,6 +208,10 @@ button[type="submit"]:hover {
   width: 90%;
 }
 
+.contact{
+  display: flex;
+  flex-direction: column;
+}
 
 /* NEW STYLE --- putting all html <style/> in this file */
 
@@ -734,7 +753,9 @@ button[type="submit"]:hover {
 
 }
 
-.close-btn-container {}
+
+
+
 
 
 .my-button {
@@ -760,7 +781,7 @@ button[type="submit"]:hover {
   left: 1ch;
   padding: 0 0.5ch;
   pointer-events: none;
-  transition: 150ms ease;
+  transition: 50ms ease;
   color: #888;
 }
 
@@ -768,7 +789,7 @@ button[type="submit"]:hover {
   position: absolute;
   top: 0;
   font-size: 0.9em;
-  color: #e14;
+  color: #e75012;
   font-weight: bold;
   transform: translateY(-50%);
   background-color: #fff;
@@ -781,14 +802,14 @@ button[type="submit"]:hover {
   border: 2px solid #eee;
   padding: 1ch;
   border-radius: 3px;
-  transition: 150ms ease;
+  transition: 50ms ease;
   outline: none;
   font-size: 1rem;
   font-family: inherit;
 }
 
 .my-text-input input.input-focus {
-  border-color: #e14;
+  border-color: #e75012;
 }
 
 .my-text-area {
@@ -802,7 +823,7 @@ button[type="submit"]:hover {
   left: 1ch;
   padding: 0 0.5ch;
   pointer-events: none;
-  transition: 150ms ease;
+  transition: 50ms ease;
   color: #888;
 }
 
@@ -810,7 +831,7 @@ button[type="submit"]:hover {
   position: absolute;
   top: 0;
   font-size: 0.9em;
-  color: #e14;
+  color: #e75012;
   font-weight: bold;
   transform: translateY(-50%);
   background-color: #fff;
@@ -823,7 +844,7 @@ button[type="submit"]:hover {
   border: 2px solid #eee;
   padding: 1ch;
   border-radius: 3px;
-  transition: 150ms ease;
+  transition: 50ms ease;
   outline: none;
   font-size: 1rem;
   font-family: inherit;
@@ -831,5 +852,5 @@ button[type="submit"]:hover {
 }
 
 .my-text-area textarea.input-focus {
-  border-color: #e14;
+  border-color: #e75012;
 }

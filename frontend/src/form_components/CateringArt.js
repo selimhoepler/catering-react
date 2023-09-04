@@ -59,7 +59,7 @@ const handleSelect = () => {
                 <div className='menu-container'>
                     {/* Hier den Inhalt für Option 1 einfügen */}
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first" justify>
-                        <Row>
+                        <Row style={{paddingLeft: '11px'}}>
                             <Col sm={2} className='my-col'>
                                 <Nav variant="pills" className="flex-column" style={{ height: '100%' }}>
                                     <Nav.Item id='nav-item-glas'>
@@ -96,7 +96,7 @@ const handleSelect = () => {
                     {/* Hier den Inhalt für Option 2 einfügen */}
 
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                        <Row>
+                        <Row style={{paddingLeft: '11px'}}>
                             <Col sm={2} className='my-col'>
                                 <Nav variant="pills" className="flex-column" style={{ height: '100%' }}>
                                     <Nav.Item id='nav-item-starters'>

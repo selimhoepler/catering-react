@@ -4,7 +4,7 @@ import os
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
 from .forms import BookingForm
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse, HttpResponseForbidden
 from django.template.loader import get_template
 from django.views import View
 from reportlab.pdfgen import canvas
@@ -15,11 +15,26 @@ from rest_framework import viewsets
 from .serializer import CateringSerializer
 from .models import CateringBooking
 
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
+
 # Create your views here.
 
 class menuView(viewsets.ModelViewSet):
     serializer_class = CateringSerializer
     queryset = CateringBooking.objects.all()
+
+
+def custom_csrf_failure(request, reason=""):
+    # Hier kannst du benutzerdefinierte Logik hinzufügen, um den Fehler zu behandeln
+    return HttpResponseForbidden("CSRF Token Validation Failed: " + reason)
+
+
+def csrf(request):
+    return JsonResponse({'csrfToken': get_token(request)})
+
+def ping(request):
+    return JsonResponse({'result': 'OK'})
 
 
 def book_catering(request):
