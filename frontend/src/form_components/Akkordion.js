@@ -290,6 +290,7 @@ const dessertBuffet = [
 ];
 
 
+
 const getraenkBuffet = [
     {
         category: "Alkoholfrei",
@@ -312,6 +313,42 @@ const getraenkBuffet = [
         ],
     }
 ];
+
+const fruehstueckBuffet = [
+    {
+        category: "Gefülltes jourgebäck",
+        dishes: [
+            "mit Schinken",
+            "mit Käse",
+            "mit Lachs",
+            "mit Salami",
+            "mit Ei-Aufstrich",
+            "mit Tomatenaufstrich",
+            "mit Thunfisch",
+            "mit Liptauer"
+        ],
+    },
+    {
+        category: "Tramezziniecken divers gefüllt",
+        dishes: [
+            "Tomate-Mozzarella mit Rucola",
+            "Schinken",
+            "Käse"
+        ],
+    },
+    {
+        category: "Diverses",
+        dishes: [
+            "Jourplunder gemischt",
+            "Joghurt mit frischen Früchten",
+            "Joghurt mit Haferflocken und Honig",
+            "Schinken oder Käseplatte mit Gebäck",
+            "Marmelade und Butter mit Gebäck"
+        ],
+    },
+    
+];
+
 
 
 const checkMaxMeals = (id, groupSize) => {
@@ -588,4 +625,37 @@ const GetraenkeContainer = ({ handleChange }) => {
 }
 
 
-export { VorspeisenContainer, HauptspeisenContainer, FingerfoodContainer, BroetchenContainer, SalatContainer, DesserContainer, GetraenkeContainer };
+const FruehstueckContainer = ({ handleChange, formData }) => {
+    return (
+        <div className='menu-selection-container'>
+            {fruehstueckBuffet.map((categoryItem) => (
+                <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
+                    <h4>{categoryItem.category}</h4>
+                    {categoryItem.dishes.map((dish) => (
+                        <div className='food-choice-cont' key={dish} >
+
+                            <input
+                                type="checkbox"
+                                className='ui-checkbox'
+                                name="meal"
+                                value={dish}
+                                onChange={e => {
+                                    
+                                    handleChange(e);
+                                }
+                                }
+                            />
+                            <label key={dish} >
+                                {dish}
+                            </label>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
+}
+
+
+
+export { VorspeisenContainer, HauptspeisenContainer, FingerfoodContainer, BroetchenContainer, SalatContainer, DesserContainer, GetraenkeContainer, FruehstueckContainer };

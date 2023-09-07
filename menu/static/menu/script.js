@@ -224,6 +224,6 @@ bookNowButton.addEventListener('click', () => {
       window.URL.revokeObjectURL(url);
 
       // Redirect to the success page
-      window.location.href = '/success/';
+    //   window.location.href = '/success/';
     });
 });

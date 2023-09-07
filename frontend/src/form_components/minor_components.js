@@ -61,7 +61,7 @@ const CateringGroupInput = ({ handleChange, formData }) => {
     return (
         <div id="cateringGroupContainer">
             <label htmlFor="cateringGroup" style={{ textAlign: 'center' }}>
-                Anzahl der Personen
+                Geben Sie hier die Anzahl der Personen ein
                 <small>(min. 5, max. 100)</small>:
             </label>
             <input

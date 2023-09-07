@@ -16,7 +16,7 @@ const TextInput = (props) => (
         onInput={props.onInput}
         onFocus={props.onFocus}
         onBlur={props.onBlur}
-
+        id={props.id}
         required
       />
     </div>
@@ -36,6 +36,7 @@ const TextInput = (props) => (
         onInput={props.onInput}
         onFocus={props.onFocus}
         onBlur={props.onBlur}
+        id={props.id}
 
         required
       />
@@ -60,7 +61,6 @@ const TextInput = (props) => (
         onFocus={props.onFocus}
         onBlur={props.onBlur} 
         
-        required
         />
     </div>
   );

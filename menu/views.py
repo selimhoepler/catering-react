@@ -17,6 +17,9 @@ from .models import CateringBooking
 
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from django.utils.functional import SimpleLazyObject
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
@@ -29,14 +32,19 @@ def custom_csrf_failure(request, reason=""):
     # Hier kannst du benutzerdefinierte Logik hinzufügen, um den Fehler zu behandeln
     return HttpResponseForbidden("CSRF Token Validation Failed: " + reason)
 
+token = ''
+
 
 def csrf(request):
-    return JsonResponse({'csrfToken': get_token(request)})
+
+    data = get_token(request)
+    print(data)
+    return JsonResponse({'csrfToken': data})
 
 def ping(request):
     return JsonResponse({'result': 'OK'})
 
-
+@ensure_csrf_cookie
 def book_catering(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -54,7 +62,10 @@ def book_catering(request):
 def success_view(request):
     return render(request, 'menu/success.html')
 
+@method_decorator(csrf_exempt, name='post')
 class GeneratePDFView(View):
+    # @ensure_csrf_cookie
+
     def post(self, request, *args, **kwargs):
         # Fetch form data
         vorname = request.POST.get('vorname')

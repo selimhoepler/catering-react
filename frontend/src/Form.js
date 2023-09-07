@@ -3,23 +3,27 @@ import CateringArt from './form_components/CateringArt';
 import { MealtimeRadioGroup, CateringGroupInput, Auststattung, BasicExampple } from './form_components/minor_components';
 import Contact from './form_components/contact/Contact';
 import Button from 'react-bootstrap/Button';
+import MealTime from './form_components/Mealtime';
+import Fruehstueck from './form_components/Fruestueck';
+import { generatePDF } from './MyPdf'; 
 
 const Form = () => {
   // State für die Formular-Daten
   const [formData, setFormData] = useState({
     bookingID: '',
-    date: '',
-    start_time: '08:00',
-    end_time: '10:30',
+    date: '2023-09-15',
+    start_time: '09:00',
+    end_time: '11:00',
     groupSize: 5,
     cateringArt: 'fingerfood',
     service: false,
     drinks: 'nein', // nötig?
     drinks: [],
     Geschirr: false,
-    meal: [],
+    meal: ['test'],
     Stehpulte: false,
     stehpulteCount: 0,
+    mealtime: 'Frühstück',
 
   });
 
@@ -29,27 +33,7 @@ const API_HOST = 'http://127.0.0.1:8000/';
 
 let _csrfToken = null;
 
-async function getCsrfToken() {
-  if (_csrfToken === null) {
-    const response = await fetch(`${API_HOST}/csrf/`, {
-      credentials: 'include',
-    });
-    const data = await response.json();
-    _csrfToken = data.csrfToken;
-  }
-  return _csrfToken;
-}
 
-
-
-  function getCookie(name) {
-    const _csrfToken = getCsrfToken();
-
-
-    const value = `; ${_csrfToken}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  }
 
 
   const submitDataToBackend = async (formData, contactData) => {
@@ -65,39 +49,31 @@ async function getCsrfToken() {
         preis: price,
       });
 
+
+        generatePDF(formData);
+      
+
+      
+
+
       console.log(formData, contactData);
       const data = { formData, contactData };
-
-      const csrfToken = await getCsrfToken();
-      console.log(csrfToken);
-
-      fetch('http://127.0.0.1:8000/generate-pdf/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken,
-        },
-        body: JSON.stringify(data),
-      })
-        .then(response => response.blob())
-        .then(blob => {
-          // Create a temporary anchor element to trigger the download
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'booking.pdf';
-          a.click();
-          window.URL.revokeObjectURL(url);
-    
-          // Redirect to the success page
-          
-        }); // Hier kannst du die Antwort des Backends verarbeiten
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
+  const addPriceToFormData = () => {
+    setFormData({
+      ...formData,
+      preis: price,
+    });
 
+  };
+
+
+
+  const [mealTime, setMealtime] = useState('fruehstueck');
 
 
   // State für den Preis, Preis de Formular auf Submit übergeben (!)
@@ -292,6 +268,7 @@ async function getCsrfToken() {
 
       const overlay = document.getElementById('contactOverlay');
       overlay.classList.toggle('active');
+      addPriceToFormData();
 
 
     }
@@ -314,20 +291,24 @@ async function getCsrfToken() {
     }
 
   };
+  const handleTime = (e) => {
+    //set end_time always 2 hours after start_time 
+    var start_time = e.value;
+    var end_time = new Date(`2022-01-01T${start_time}:00`);
+    end_time.setHours(end_time.getHours() + 2);
+    var end_time_string = end_time.toTimeString().slice(0, 5);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      end_time: end_time_string,
+    }));
+  }; 
+
 
 
   const validateFields = () => {
     var date = formData.date;
     var start_time = formData.start_time;
-    var end_time = formData.end_time;
-    var groupSize = formData.groupSize;
-    var cateringArt = formData.cateringArt;
     var meal = formData.meal;
-    var service = formData.service;
-    var drinks = formData.drinks;
-    var Geschirr = formData.Geschirr;
-    var Stehpulte = formData.Stehpulte;
-    var stehpulteCount = formData.stehpulteCount;
     var errors = [];
 
     var isValid = true;
@@ -395,6 +376,7 @@ async function getCsrfToken() {
             const newValue = e.target.value; // Capture the event value
 
             handleChange(e); // Call the first function with the event
+            handleTime({ value: newValue});
 
           }} required />
           <label htmlFor="end_time" style={{ marginBottom: '0px', marginTop: '10px' }}>
@@ -410,6 +392,7 @@ async function getCsrfToken() {
         <br />
         {/* <MealtimeRadioGroup handleChange={handleChange} formData={formData} /> */}
         <CateringGroupInput handleChange={handleChange} formData={formData} />
+        <MealTime handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime}/>
 
         <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
           <div className='card-header'> INFO </div>
@@ -425,8 +408,14 @@ async function getCsrfToken() {
           </div>
         </div>
       </div>
+
+      {mealTime === 'fruehstueck' && (
+      <Fruehstueck handleChange={handleChange} formData={ formData} />
+      )}
+      {mealTime === 'mittag' && (
       <CateringArt handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} />
-      {/* Continue with the rest of the form elements */}
+      )}
+
       <div className='sub-container' style={{ width: '417px' }}>
         <Auststattung handleChange={handleChange} formData={formData} />
 
@@ -444,9 +433,9 @@ async function getCsrfToken() {
           </div>
         </div>
 
-        <Button onClick={toggleOverlay}>
-          Weiter
-        </Button>
+        
+        <button className="submit-btn" onClick={toggleOverlay} style={{marginTop: '30px'}}>Weiter</button>
+
       </div>
       <div className="my-overlay" id='errorsOverlay' >
         <div className='overlay-content-container'>
@@ -461,7 +450,7 @@ async function getCsrfToken() {
       <div className="my-overlay" id='contactOverlay' >
         <div className='overlay-content-container'>
           <div className='contact-container'>
-            <Contact onSubmit={submitDataToBackend} formData={formData} />
+            <Contact onSubmit={submitDataToBackend} addPrice={addPriceToFormData} formData={formData} />
 
 
           </div>

@@ -3,7 +3,7 @@ import { TextInput, TextArea, Contact_button, TelephoneInput } from './Contact-c
 
 
 
-const Contact = ({ onSubmit, formData }) => {
+const Contact = ({ onSubmit, addPrice, formData }) => {
 
 
     const [contactData, setContactData] = useState({
@@ -39,6 +39,50 @@ const Contact = ({ onSubmit, formData }) => {
     });
 
 
+
+
+
+    const validateFields = (e) => {
+        var name = contactData.name.value;
+        var email = contactData.email.value;
+        
+        var telephone = contactData.telephone.value;
+
+        var errors = [];
+    
+        var isValid = true;
+    
+        if (name === '') {
+          
+          errors.push('name-input');
+        }
+    
+        if (email === '') { 
+          
+            errors.push('email-input');
+
+
+        }
+        
+        if (telephone === '') {
+            isValid = false;
+            
+            errors.push('telephone-input');
+        }
+    
+        if (errors.length > 0) {
+        //iterate through errors array and add class to each element
+        errors.forEach((element) => {
+            document.getElementById(element).classList.add('error');
+            });
+        }
+        else {
+            handleSubmit(e);
+        }
+    
+      }
+
+
       
 
     const getValues = (contactData) => {
@@ -55,6 +99,7 @@ const Contact = ({ onSubmit, formData }) => {
         e.preventDefault();
         const clearContactData = getValues(contactData);
         console.log(clearContactData);
+        
 
         // Überprüfe, ob die Checkbox ausgewählt ist
         const privacyCheckbox = document.getElementById('privacy-checkbox');
@@ -126,23 +171,28 @@ const Contact = ({ onSubmit, formData }) => {
                 </select>
             </div>
             <TextInput
+                id="name-input"
                 {...contactData.name}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onChange={handleDataChange}
+                required
             />
             <TextInput
                 {...contactData.email}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onChange={handleDataChange}
+                id="email-input"
             />
             <TelephoneInput
                 {...contactData.telephone}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onChange={handleDataChange}
+                id="telephone-input"
             />
+            
             <TextArea
                 {...contactData.message}
                 onFocus={handleFocus}
@@ -158,7 +208,7 @@ const Contact = ({ onSubmit, formData }) => {
                     }}>*</span>
                 </div>
                 <div>
-                    <button className="submit-btn" onClick={handleSubmit}>Abschließen</button>
+                    <button className="submit-btn" onClick={validateFields}>Abschließen</button>
                 </div>
             </div>
 
