@@ -1,0 +1,23 @@
+
+
+media 1450
+
+.info-card {
+    width: ...
+} 
+
+nav-pills .nav-link {
+    font-size: small/medium
+    }
+
+.card {
+     font-size: smaller
+}
+.food-choice-cont label {
+    padding-left: 0px
+}
+
+label  {
+    margin-bottom: 5px;
+}
+

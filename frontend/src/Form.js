@@ -348,7 +348,7 @@ let _csrfToken = null;
   // return HTML (jsx) ------------------------------
   return (
     <form>
-      <div className='sub-container'>
+      <div className='sub-container' id='first-sub'>
         <div className='date-and-time' >
           <label htmlFor="date" style={{ marginBottom: '0px', marginTop: '10px' }}>
             Datum:
@@ -416,7 +416,7 @@ let _csrfToken = null;
       <CateringArt handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} />
       )}
 
-      <div className='sub-container' style={{ width: '417px' }}>
+      <div className='sub-container' id="second-sub" style={{ width: '417px' }}>
         <Auststattung handleChange={handleChange} formData={formData} />
 
 
