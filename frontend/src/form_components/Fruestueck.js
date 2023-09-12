@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 
-//TODO: import react-bootstrap, change iport dir 
+//basically the same as CateringArt comp, however i wanted to seperate the 'frühstück' and 'mittag' becuase otherwise CateringArt.js would be overloaded
 
 const Fruehstueck = ({ handleChange, formData }) => {
     const [tabVariant, setTabVariant] = useState('initial');

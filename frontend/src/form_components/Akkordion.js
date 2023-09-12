@@ -1,6 +1,11 @@
 import React from 'react';
 
+/* Food info is stored here in lists 
+    list is iterated through and puts out small containers ordered after category with a checkbox next to each list element
 
+    returns all the different containers for the main categories like main, starters, salat, etc...
+
+*/
 
 const hauptspeisenBuffet = [
     {
@@ -350,7 +355,10 @@ const fruehstueckBuffet = [
 ];
 
 
-
+// function to check how many dishes per category can be selected. gets GroupSize from passed formData.
+// disbales checkboxes in category container or enables them
+// Also puts out a little warning in the info-box from first Subcontainer
+// Always gets called onChange at a checkbox
 const checkMaxMeals = (id, groupSize) => {
 
     var maxMeals = 3;

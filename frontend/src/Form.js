@@ -7,8 +7,20 @@ import MealTime from './form_components/Mealtime';
 import Fruehstueck from './form_components/Fruestueck';
 import { generatePDF } from './MyPdf'; 
 
+
+
+/* Form is the big container component of this app, containing various smaller and sub components, the HTML-Form and formData, which gets submitted to the backend  
+  if there is console.log its for debug
+*/
+
+
+
+
+
+
 const Form = () => {
-  // State für die Formular-Daten
+  // State for formular data
+  // this object will be submitted to the backend as JSON
   const [formData, setFormData] = useState({
     bookingID: '',
     date: '2023-09-15',
@@ -29,20 +41,13 @@ const Form = () => {
 
 
   
-const API_HOST = 'http://127.0.0.1:8000/';
-
-let _csrfToken = null;
 
 
 
-
+// after user put all the information, the data from the catering-order aswell as the Contact Data of the user will be submitted to the backend
+// FOR NOW: ONLY GENERATING PDF; NOT SENDING ANYTHING TO BACKEND
   const submitDataToBackend = async (formData, contactData) => {
     try {
-      // Hier Axios oder Fetch verwenden, um die Daten an das Backend zu senden
-      // const response = await axios.post('/api/your-endpoint', {
-      //   formData,
-      //   contactData,
-      // });
 
       setFormData({
         ...formData,
@@ -76,12 +81,12 @@ let _csrfToken = null;
   const [mealTime, setMealtime] = useState('fruehstueck');
 
 
-  // State für den Preis, Preis de Formular auf Submit übergeben (!)
+  // State for Price
   const [price, setPrice] = useState(0);
 
 
 
-  // Funktion zum Aktualisieren der Formular-Daten
+  // Function to handle Change of FormData
   const handleChange = (e) => {
 
     const { name, value, type, checked } = e.target;
@@ -119,7 +124,8 @@ let _csrfToken = null;
 
 
 
-
+  // clear meal and drinks from formData when either mealtime changes or switching between fingerfood and buffet.
+  // It is because the checkboxes get unchecked when switching
   const handleClearMeal = () => {
     setFormData({
       ...formData,
@@ -128,7 +134,7 @@ let _csrfToken = null;
     });
   };
 
-  // Funktion zum Berechnen des Preises basierend auf den ausgewählten Optionen
+  // Function to calculate price based on user choices and input
   const calculatePrice = (indicator) => {
 
     var groupSize = formData.groupSize;
@@ -157,7 +163,7 @@ let _csrfToken = null;
 
   };
 
-  // Effekt zum Aktualisieren des Preises, wenn sich die Formulardaten ändern
+  // Change price when formData changes
   useEffect(() => {
     var tempPrice = calculatePrice("useEffect");
     setPrice(tempPrice);
@@ -167,6 +173,8 @@ let _csrfToken = null;
     // });
   }, [formData]);
 
+
+  // Next functions are own logic for calculating the price
 
   function updateTransportKosten() {
     var groupSize = formData.groupSize;
@@ -236,6 +244,11 @@ let _csrfToken = null;
   }
 
 
+
+
+
+
+// function to alert user when date selected has already passed
   const setTimeout = (e) => {
     var dateParts = e.value.split('-');
     var year = parseInt(dateParts[0]);
@@ -260,6 +273,9 @@ let _csrfToken = null;
     }
   };
 
+
+  //function to toggle the overlay where user can input personal and contact Data.
+  // calls validateFields() and switches between showing errors or letting user input contactData
   const toggleOverlay = () => {
 
     const errors = validateFields();
@@ -291,6 +307,10 @@ let _csrfToken = null;
     }
 
   };
+
+
+
+  // func that automatically puts the end_time 2 hours later then the start_time when changing start_time
   const handleTime = (e) => {
     //set end_time always 2 hours after start_time 
     var start_time = e.value;
@@ -304,7 +324,9 @@ let _csrfToken = null;
   }; 
 
 
-
+// custom field validation for before user gets to input cotact Data
+// checks if a date is selected, if time is valid (currently between 9AM and 10PM, potential change), and if anything is selected in the menu
+// returns a list of errors
   const validateFields = () => {
     var date = formData.date;
     var start_time = formData.start_time;
@@ -348,6 +370,8 @@ let _csrfToken = null;
   // return HTML (jsx) ------------------------------
   return (
     <form>
+
+      {/* sub container containing date and time input, catering gorpu size component and info box for how manyy meals can be selected, Also contains the switch between mealtimes which is being stored in const mealTime */}
       <div className='sub-container' id='first-sub'>
         <div className='date-and-time' >
           <label htmlFor="date" style={{ marginBottom: '0px', marginTop: '10px' }}>
@@ -409,6 +433,11 @@ let _csrfToken = null;
         </div>
       </div>
 
+
+
+
+
+      {/* const mealtime conditional renddering either renders the #mittag' or the 'frühstück' food choices sub container*/}
       {mealTime === 'fruehstueck' && (
       <Fruehstueck handleChange={handleChange} formData={ formData} />
       )}
@@ -416,6 +445,11 @@ let _csrfToken = null;
       <CateringArt handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} />
       )}
 
+
+
+
+
+      {/* sub Container containing some Catering info for formData and the button which sends you to the overlay on toggleOverlay()*/}
       <div className='sub-container' id="second-sub" style={{ width: '417px' }}>
         <Auststattung handleChange={handleChange} formData={formData} />
 
@@ -459,6 +493,7 @@ let _csrfToken = null;
           </div>
         </div>
       </div>
+      <canvas id="backgroundCanvas" width="210" height="297" style={{display: 'none'}}></canvas>
     </form>
   );
 };

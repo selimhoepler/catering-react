@@ -897,6 +897,17 @@ button[type="submit"]:hover {
     width: 3px;
 
   }
+
+  .my-col-2 {
+    padding: 0px;
+    width: 75% !important;
+  }
+
+  .my-col {
+    padding: 0px;
+    width: 25% !important;
+  }
+
 }
 
 @media only screen and (max-width: 1550px) {
@@ -987,12 +998,253 @@ button[type="submit"]:hover {
 
   .nav-item:hover {
 
-  border-top-left-radius: 0px !important;
-  border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .nav-tabs {
+    --bs-nav-tabs-border-radius: none !important;
+  }
+
+  .tab-content {
+    width: 100%;
+
+  }
 }
 
-.nav-tabs{
-  --bs-nav-tabs-border-radius: none !important;
+@media only screen and (max-width: 900px) {
+
+  .menuContainer {
+    width: 620px;
+  }
+
+
+  .info-card {
+    width: 200px !important;
+  }
+
+  form {
+    flex-wrap: wrap;
+  }
+
+  .checkbox-container {
+    width: 60%;
+    border-bottom: 1px solid #403735;
+    padding-right: 0%;
+  }
+
+  #first-sub {
+    width: 40%;
+    border-bottom: 1px solid #403735;
+    padding-left: 0px;
+    padding-top: 0%;
+  }
+
+  #root {
+    height: auto;
+  }
+
+  #second-sub {
+    width: 100% !important;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .nav-link {
+    text-shadow: none;
+    color: #e75012 !important;
+  }
+
+  .nav-link.active {
+    color: white !important;
+    background-color: #e75012 !important;
+    border-color: #e75012 !important;
+  }
+
+  .nav-item button:hover {
+    color: white !important;
+    border-color: #e75012 !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .nav-item:hover {
+
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .nav-tabs {
+    --bs-nav-tabs-border-radius: none !important;
+  }
+
+
+
 }
+
+
+@media only screen and (max-width: 630px) {
+
+  .menuContainer {
+    width: 500px;
+  }
+
+
+  .info-card {
+    width: 100% !important;
+  }
+
+  form {
+    flex-wrap: wrap;
+  }
+
+  .checkbox-container {
+    width: 100%;
+    border-bottom: 1px solid #403735;
+    padding-right: 0%;
+    border-left: none !important;
+    padding-left: 0px !important;
+  }
+
+  #first-sub {
+    width: 100%;
+    border-bottom: 1px solid #403735;
+    padding-left: 0px;
+    padding-top: 0%;
+  }
+
+  #root {
+    height: auto;
+  }
+
+  #second-sub {
+    width: 100% !important;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .nav-link {
+    text-shadow: none;
+    color: #e75012 !important;
+  }
+
+  .nav-link.active {
+    color: white !important;
+    background-color: #e75012 !important;
+    border-color: #e75012 !important;
+  }
+
+  .nav-item button:hover {
+    color: white !important;
+    border-color: #e75012 !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .nav-item:hover {
+
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .nav-tabs {
+    --bs-nav-tabs-border-radius: none !important;
+  }
+
+  .submit-btn {
+    z-index: 100;
+  }
+
+
+
+}
+
+@media only screen and (max-width: 500px) {
+
+  .menuContainer {
+    width: 500px;
+  }
+
+
+  .info-card {
+    width: 100% !important;
+  }
+
+  form {
+    flex-wrap: wrap;
+  }
+
+  .checkbox-container {
+    width: 100%;
+    border-bottom: 1px solid #403735;
+    padding-right: 0%;
+    border-left: none !important;
+    padding-left: 0px !important;
+  }
+
+  .menu-selection-container {
+    flex-direction: column;
+  }
+
+  #first-sub {
+    width: 100%;
+    border-bottom: 1px solid #403735;
+    padding-left: 0px;
+    padding-top: 0%;
+  }
+
+  #root {
+    height: auto;
+  }
+
+  #second-sub {
+    width: 100% !important;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .nav-link {
+    text-shadow: none;
+    color: #e75012 !important;
+  }
+
+  .nav-link.active {
+    color: white !important;
+    background-color: #e75012 !important;
+    border-color: #e75012 !important;
+  }
+
+  .nav-item button:hover {
+    color: white !important;
+    border-color: #e75012 !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .nav-item:hover {
+
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .nav-tabs {
+    --bs-nav-tabs-border-radius: none !important;
+  }
+
+  .submit-btn {
+    z-index: 100;
+  }
+
+
+  label {
+    font-size: initial;
+  }
+
+  .my-overlay {
+    position: fixed;
+  }
 
 }

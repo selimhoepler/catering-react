@@ -1,7 +1,41 @@
 import jsPDF from 'jspdf';
 
+
 export function generatePDF(formData) {
     const doc = new jsPDF();
+
+
+    const totalPages = doc.internal.getNumberOfPages();
+    const dataURL = null;
+
+
+
+
+    const backgroundCanvas = document.getElementById('backgroundCanvas');
+    const backgroundContext = backgroundCanvas.getContext('2d');
+    const backgroundImage = new Image();
+
+    backgroundImage.src = 'https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg?t=st=1693481873~exp=1693482473~hmac=5751f5583253f3c6766ff9782c555e09482ef6e341dfd94887d2184586a0a119'; // Replace with the path to your background image
+
+    backgroundImage.crossOrigin = 'anonymous'; // set the crossOrigin attribute to allow loading the image from a different domain
+    backgroundImage.onload = function() {
+      backgroundCanvas.width = backgroundImage.width;
+      backgroundCanvas.height = backgroundImage.height;
+      backgroundContext.drawImage(backgroundImage, 0, 0);
+      dataURL = backgroundCanvas.toDataURL('image/jpeg');
+      // use the dataURL to generate the PDF
+    };
+
+    for (let page = 1; page <= totalPages; page++) {
+        doc.setPage(page);
+        // doc.addImage(backgroundCanvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+        doc.addImage(dataURL, 'JPEG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+
+
+    }
+
+
+
 
     // Fügen Sie Ihren PDF-Inhalt hier ein
     doc.text(20, 20, `Booking ID: ${formData.bookingID}`);
@@ -24,7 +58,6 @@ export function generatePDF(formData) {
 
     // Speichern Sie das PDF oder zeigen Sie es im Browser an
     doc.save('catering_anfrage.pdf');
+
+
 }
-
-
-

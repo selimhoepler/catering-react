@@ -8,11 +8,31 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-//TODO: import react-bootstrap, change iport dir 
+
+
+/* buttongroup that lets user switch between fingerfood and buffet
+    calls clearMeal on change which clears everything in formData.meal and fromData.drinks
+
+    Container which shows all the checkbox Components form Akkordion.js
+    The const  tabVariant decides between which tab variant is rendered. 
+
+    So there is either the 'initial' way and then the const selectedvalue decides if it is fingerood or buffet.
+    or the 'variant' which also has a condition inside, decideing between fingerfood and buffet
+
+    
+
+*/
+
+
+
 
 const CateringArt = ({ handleChange, formData, clearMeal }) => {
     const [selectedValue, setSelectedValue] = useState('Fingerfood');
     const [tabVariant, setTabVariant] = useState('initial');
+
+
+
+
 
     useEffect(() => {
         // Überprüfe die Bildschirmbreite und aktualisiere die colClass entsprechend

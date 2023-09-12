@@ -4,7 +4,7 @@ import React from 'react';
 import Form from './Form';
 
 
-
+// Only Form component from Form.js rendered here
 
 
 function App() {
