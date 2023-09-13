@@ -11,6 +11,25 @@ import { generatePDF } from './MyPdf';
 
 /* Form is the big container component of this app, containing various smaller and sub components, the HTML-Form and formData, which gets submitted to the backend  
   if there is console.log its for debug
+
+
+
+  DATA will be sent like:
+  data = {
+    formData {
+      bookinID: '123983',
+      date: '2023-11-21',
+      ...
+    }
+  	contactData {
+      name: 'ali assad',
+      email: 'assad@gmaul.com,
+      ...
+    }
+  }
+
+
+  So the backend just has to data.contactData.name for the name e.g
 */
 
 

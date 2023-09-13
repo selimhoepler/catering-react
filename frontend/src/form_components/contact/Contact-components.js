@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-
+// Components for Contact.js
 
 const TextInput = (props) => (
     <div className="my-text-input">

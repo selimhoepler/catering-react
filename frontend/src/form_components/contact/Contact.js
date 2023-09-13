@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { TextInput, TextArea, Contact_button, TelephoneInput } from './Contact-components';
 
+/* Container width contact input
 
+    contactData saves fields for name, telephone, etc... is being submitted to backend with formData from Form.js
+
+*/
 
 const Contact = ({ onSubmit, addPrice, formData }) => {
 
@@ -84,7 +88,7 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
 
 
       
-
+    // func so idt ndoesnt return the whole of contactData but just the important values for the order
     const getValues = (contactData) => {
 
         // for every key in contactData, get the value of ['value'] and return it like key: value;
@@ -112,6 +116,8 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
     };
 
 
+
+    //Some style loogic and logic to add to contactData
 
     const handleFocus = (e) => {
         const fieldName = e.target.name;
