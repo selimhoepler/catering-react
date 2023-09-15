@@ -5,7 +5,7 @@ import Contact from './form_components/contact/Contact';
 import Button from 'react-bootstrap/Button';
 import MealTime from './form_components/Mealtime';
 import Fruehstueck from './form_components/Fruestueck';
-import { generatePDF } from './MyPdf'; 
+import { generatePDF } from './MyPdf';
 
 
 
@@ -21,7 +21,7 @@ import { generatePDF } from './MyPdf';
       date: '2023-11-21',
       ...
     }
-  	contactData {
+    contactData {
       name: 'ali assad',
       email: 'assad@gmaul.com,
       ...
@@ -42,16 +42,30 @@ const Form = () => {
   // this object will be submitted to the backend as JSON
   const [formData, setFormData] = useState({
     bookingID: '',
-    date: '2023-09-15',
+    date: '',
     start_time: '09:00',
     end_time: '11:00',
     groupSize: 5,
     cateringArt: 'fingerfood',
     service: false,
-    drinks: 'nein', // nötig?
     drinks: [],
     Geschirr: false,
-    meal: ['test'],
+    meal: {
+      fruehstueck: {
+        fruehstueck: []
+      },
+      buffet: {
+        vorspeise: [],
+        hauptspeise: [],
+        salat: [],
+        dessert: [],
+      },
+      fingerfood: {
+        glas: [],
+        broetchen: [],
+      }
+
+    },
     Stehpulte: false,
     stehpulteCount: 0,
     mealtime: 'Frühstück',
@@ -59,12 +73,12 @@ const Form = () => {
   });
 
 
-  
 
 
 
-// after user put all the information, the data from the catering-order aswell as the Contact Data of the user will be submitted to the backend
-// FOR NOW: ONLY GENERATING PDF; NOT SENDING ANYTHING TO BACKEND
+
+  // after user put all the information, the data from the catering-order aswell as the Contact Data of the user will be submitted to the backend
+  // FOR NOW: ONLY GENERATING PDF; NOT SENDING ANYTHING TO BACKEND
   const submitDataToBackend = async (formData, contactData) => {
     try {
 
@@ -74,10 +88,10 @@ const Form = () => {
       });
 
 
-        generatePDF(formData);
-      
+      generatePDF(formData);
 
-      
+
+
 
 
       console.log(formData, contactData);
@@ -113,24 +127,45 @@ const Form = () => {
     console.log(category);
     if (type === 'checkbox') {
       // Überprüfe, ob formData[name] ein Array ist
-      if (Array.isArray(formData[name])) {
-        // Wenn es ein Array ist, aktualisiere die ausgewählten Werte
-        const updatedValue = checked
-          ? [...formData[name], value]
-          : formData[name].filter((item) => item !== value);
-        
+      if (name === 'drinks') {
+        if (Array.isArray(formData[name])) {
+          // Wenn es ein Array ist, aktualisiere die ausgewählten Werte
+          const updatedValue = checked
+            ? [...formData[name], value]
+            : formData[name].filter((item) => item !== value);
+
           setFormData({
             ...formData,
             [name]: updatedValue,
           });
-      } else {
-        // Wenn es kein Array ist, setze den Wert als einzelnes Element-Array
+        } else {
+          // Wenn es kein Array ist, setze den Wert als einzelnes Element-Array
+          setFormData({
+            ...formData,
+            [name]: checked,
+          });
+        };
+        console.log(value, formData);
+      }
+      // UNCHECKED CODE FROM COPILOT
+      else if (name === 'meal') {
+
+        const [subCategory, subList] = category.split('.');
+        const updatedValue = checked
+          ? [...formData[name][subCategory][subList], value]
+          : formData[name][subCategory][subList].filter((item) => item !== value);
+
         setFormData({
           ...formData,
-          [name]: checked,
+          meal: {
+            ...formData.meal,
+            [subCategory]: {
+              ...formData.meal[subCategory],
+              [subList]: updatedValue,
+            },
+          },
         });
-      };
-      console.log(value, formData);
+      }
     } else {
       setFormData({
         ...formData,
@@ -267,7 +302,7 @@ const Form = () => {
 
 
 
-// function to alert user when date selected has already passed
+  // function to alert user when date selected has already passed
   const setTimeout = (e) => {
     var dateParts = e.value.split('-');
     var year = parseInt(dateParts[0]);
@@ -340,12 +375,12 @@ const Form = () => {
       ...prevFormData,
       end_time: end_time_string,
     }));
-  }; 
+  };
 
 
-// custom field validation for before user gets to input cotact Data
-// checks if a date is selected, if time is valid (currently between 9AM and 10PM, potential change), and if anything is selected in the menu
-// returns a list of errors
+  // custom field validation for before user gets to input cotact Data
+  // checks if a date is selected, if time is valid (currently between 9AM and 10PM, potential change), and if anything is selected in the menu
+  // returns a list of errors
   const validateFields = () => {
     var date = formData.date;
     var start_time = formData.start_time;
@@ -419,7 +454,7 @@ const Form = () => {
             const newValue = e.target.value; // Capture the event value
 
             handleChange(e); // Call the first function with the event
-            handleTime({ value: newValue});
+            handleTime({ value: newValue });
 
           }} required />
           <label htmlFor="end_time" style={{ marginBottom: '0px', marginTop: '10px' }}>
@@ -435,7 +470,7 @@ const Form = () => {
         <br />
         {/* <MealtimeRadioGroup handleChange={handleChange} formData={formData} /> */}
         <CateringGroupInput handleChange={handleChange} formData={formData} />
-        <MealTime handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime}/>
+        <MealTime handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime} />
 
         <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
           <div className='card-header'> INFO </div>
@@ -458,10 +493,10 @@ const Form = () => {
 
       {/* const mealtime conditional renddering either renders the #mittag' or the 'frühstück' food choices sub container*/}
       {mealTime === 'fruehstueck' && (
-      <Fruehstueck handleChange={handleChange} formData={ formData} />
+        <Fruehstueck handleChange={handleChange} formData={formData} />
       )}
       {mealTime === 'mittag' && (
-      <CateringArt handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} />
+        <CateringArt handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} />
       )}
 
 
@@ -486,8 +521,8 @@ const Form = () => {
           </div>
         </div>
 
-        
-        <button className="submit-btn" onClick={toggleOverlay} style={{marginTop: '30px'}}>Weiter</button>
+
+        <button className="submit-btn" onClick={toggleOverlay} style={{ marginTop: '30px' }}>Weiter</button>
 
       </div>
       <div className="my-overlay" id='errorsOverlay' >
@@ -512,7 +547,7 @@ const Form = () => {
           </div>
         </div>
       </div>
-      <canvas id="backgroundCanvas" width="210" height="297" style={{display: 'none'}}></canvas>
+      <canvas id="backgroundCanvas" width="210" height="297" style={{ display: 'none' }}></canvas>
     </form>
   );
 };
