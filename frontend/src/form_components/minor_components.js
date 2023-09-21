@@ -1,59 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
 
-//This is not used in current code
-const MealtimeRadioGroup = ({ handleChange, formData }) => {
-    return (
-        <div className="card" style={{ maxWidth: '18rem' }}>
-            <div className="card-header">Uhrzeit</div>
-            <div className="card-body">
-                <div className="form-check">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        name="mealtime"
-                        id="frühstückradio"
-                        value="Frühstück"
-                        checked={formData.mealtime === 'Frühstück'}
-                        onChange={handleChange}
-                    />
-                    <label className="form-check-label" htmlFor="frühstückradio">
-                        Frühstück
-                    </label>
-                </div>
-                <div className="form-check">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        name="mealtime"
-                        id="mittagRadio"
-                        value="Mittag"
-                        checked={formData.mealtime === 'Mittag'}
-                        onChange={handleChange}
-                    />
-                    <label className="form-check-label" htmlFor="mittagRadio">
-                        Mittagessen
-                    </label>
-                </div>
-                <div className="form-check">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        name="mealtime"
-                        id="abendradio"
-                        value="Abendessen"
-                        checked={formData.mealtime === 'Abendessen'}
-                        onChange={handleChange}
-                    />
-                    <label className="form-check-label" htmlFor="abendradio">
-                        Abendessen
-                    </label>
-                </div>
-            </div>
-        </div>
-    );
-};
 
 
 
@@ -120,4 +68,4 @@ const Auststattung = ({ handleChange, formData }) => {
 
 
 
-    export { MealtimeRadioGroup, CateringGroupInput, Auststattung }
+    export {  CateringGroupInput, Auststattung }

@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import CateringArt from './form_components/CateringArt';
-import { MealtimeRadioGroup, CateringGroupInput, Auststattung, BasicExampple } from './form_components/minor_components';
+import { CateringGroupInput, Auststattung } from './form_components/minor_components';
 import Contact from './form_components/contact/Contact';
-import Button from 'react-bootstrap/Button';
 import MealTime from './form_components/Mealtime';
 import Fruehstueck from './form_components/Fruestueck';
 import { generatePDF } from './MyPdf';
@@ -150,22 +149,40 @@ const Form = () => {
       // UNCHECKED CODE FROM COPILOT
       else if (name === 'meal') {
 
-        const [subCategory, subList] = category.split('.');
-        const updatedValue = checked
-          ? [...formData[name][subCategory][subList], value]
-          : formData[name][subCategory][subList].filter((item) => item !== value);
+        const subCategory = e.target.getAttribute('subcategory');
+        const subList = e.target.getAttribute('sublist');
+        console.log(subCategory, subList)
+        console.log(checked)
+        console.log( formData);
+        console.log( formData['meal']);
+        if (Array.isArray(formData[name][subCategory][subList])) {
+          const updatedValue = checked
+            ? [...formData[name][subCategory][subList], value]
+            : formData[name][subCategory][subList].filter((item) => item !== value);
 
-        setFormData({
-          ...formData,
-          meal: {
-            ...formData.meal,
-            [subCategory]: {
-              ...formData.meal[subCategory],
-              [subList]: updatedValue,
+          setFormData({
+            ...formData,
+            meal: {
+              ...formData.meal,
+              [subCategory]: {
+                ...formData.meal[subCategory],
+                [subList]: updatedValue,
+              },
             },
-          },
-        });
-      }
+          });
+        } else {
+          setFormData({
+            ...formData,
+            meal: {
+              ...formData.meal,
+              [subCategory]: {
+                ...formData.meal[subCategory],
+                [subList]: checked,
+              },
+            },
+          });
+        }
+      };
     } else {
       setFormData({
         ...formData,
@@ -183,7 +200,22 @@ const Form = () => {
   const handleClearMeal = () => {
     setFormData({
       ...formData,
-      meal: [],
+      meal: {
+        fruehstueck: {
+          fruehstueck: []
+        },
+        buffet: {
+          vorspeise: [],
+          hauptspeise: [],
+          salat: [],
+          dessert: [],
+        },
+        fingerfood: {
+          glas: [],
+          broetchen: [],
+        }
+  
+      },
       drinks: [],
     });
   };

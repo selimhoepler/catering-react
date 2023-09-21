@@ -409,8 +409,16 @@ button[type="submit"]:hover {
 
 .card {
   overflow: auto;
+  overflow-x: hidden;
 
 }
+
+/* .category-label{
+  position: fixed;
+  width: max-content;
+  background-color: white;
+  z-index: 100;
+} */
 
 .shadowy {
   background: #ffffff;

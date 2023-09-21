@@ -9,6 +9,8 @@ import React from 'react';
 
 const hauptspeisenBuffet = [
     {
+        subcategory: "buffet",
+        sublist: "hauptspeise",
         category: "Fleisch",
         dishes: [
             "Gekochtes Rindfleisch mit Kartoffelschmarren und Schnittlauch Sauce und Apfelkren",
@@ -32,6 +34,8 @@ const hauptspeisenBuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "hauptspeise",
         category: "Vegetarisch",
         dishes: [
             "Spinat-Schafkäse Strudel mit Salzkartoffel und Kräuterdip",
@@ -51,6 +55,8 @@ const hauptspeisenBuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "hauptspeise",
         category: "Vegan",
         dishes: [
             "Buchweizen Risotto mit Salat",
@@ -62,6 +68,8 @@ const hauptspeisenBuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "hauptspeise",
         category: "Fisch",
         dishes: [
             "Gebratenes Zanderfilet auf Rahmtagliatelle",
@@ -75,6 +83,8 @@ const hauptspeisenBuffet = [
 
 const vorspeisenBuffet = [
     {
+        subcategory: "buffet",
+        sublist: "vorspeise",
         category: "Fleisch",
         dishes: [
             "Hühnercurrysalat mit Ananas",
@@ -88,6 +98,8 @@ const vorspeisenBuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "vorspeise",
         category: "Vegetarisch",
         dishes: [
             "Cous cous Salat",
@@ -99,6 +111,8 @@ const vorspeisenBuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "vorspeise",
         category: "Vegan",
         dishes: [
             "Antipasti",
@@ -109,6 +123,8 @@ const vorspeisenBuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "vorspeise",
         category: "Fisch",
         dishes: [
             "Palatschinken-Röllchen mit Frischkäse und Räucherlachs",
@@ -120,6 +136,8 @@ const vorspeisenBuffet = [
 
 const fingerfoodBuffet = [
     {
+        subcategory: "fingerfood",
+        sublist: "glas",
         category: "Kalt",
         dishes: [
             "Tomaten-Mozzarella Spießchen auf Pesto",
@@ -143,6 +161,8 @@ const fingerfoodBuffet = [
         ],
     },
     {
+        subcategory: "fingerfood",
+        sublist: "glas",
         category: "Warm",
         dishes: [
             "Kleine Faschierte Laibchen auf Gurkenrahmsalat",
@@ -160,6 +180,8 @@ const fingerfoodBuffet = [
         ],
     },
     {
+        subcategory: "fingerfood",
+        sublist: "glas",
         category: "Desserts",
         dishes: [
             "Punschwürfel",
@@ -176,6 +198,8 @@ const fingerfoodBuffet = [
 
 const BroetchenBuffet = [
     {
+        subcategory: "fingerfood",
+        sublist: "broetchen",
         category: "Brötchen",
         dishes: [
             "Putenschinken mit Silberzwiebel",
@@ -194,6 +218,8 @@ const BroetchenBuffet = [
         ],
     },
     {
+        subcategory: "fingerfood",
+        sublist: "broetchen",
         category: "Aufstriche",
         dishes: [
             "Ei-Aufstrich mit frischen Schnittlauch",
@@ -212,6 +238,8 @@ const BroetchenBuffet = [
         ],
     },
     {
+        subcategory: "fingerfood",
+        sublist: "broetchen",
         category: "Vegane Aufstriche",
         dishes: [
             "Grünkernaufstrich",
@@ -227,6 +255,8 @@ const BroetchenBuffet = [
 
 const salatbuffet = [
     {
+        subcategory: "buffet",
+        sublist: "salat",
         category: "Salate",
         dishes: [
             "Kartoffelsalat",
@@ -243,6 +273,8 @@ const salatbuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "salat",
         category: "Dressings",
         dishes: [
             "Hausdressing (Essig öl mit Gorgonzola)",
@@ -257,6 +289,8 @@ const salatbuffet = [
 
 const dessertBuffet = [
     {
+        subcategory: "buffet",
+        sublist: "dessert",
         category: "Desserts",
         dishes: [
             "Kaiserschmarren mit Zwetschkenröster",
@@ -283,6 +317,8 @@ const dessertBuffet = [
         ],
     },
     {
+        subcategory: "buffet",
+        sublist: "dessert",
         category: "Vegane Desserts",
         dishes: [
             "Vegan:",
@@ -321,6 +357,8 @@ const getraenkBuffet = [
 
 const fruehstueckBuffet = [
     {
+        subcategory: "fruehstueck",
+        sublist: "fruehstueck",
         category: "Gefülltes jourgebäck",
         dishes: [
             "mit Schinken",
@@ -334,6 +372,8 @@ const fruehstueckBuffet = [
         ],
     },
     {
+        subcategory: "fruehstueck",
+        sublist: "fruehstueck",
         category: "Tramezziniecken divers gefüllt",
         dishes: [
             "Tomate-Mozzarella mit Rucola",
@@ -342,6 +382,8 @@ const fruehstueckBuffet = [
         ],
     },
     {
+        subcategory: "fruehstueck",
+        sublist: "fruehstueck",
         category: "Diverses",
         dishes: [
             "Jourplunder gemischt",
@@ -422,7 +464,9 @@ const HauptspeisenContainer = ({ handleChange, formData }) => {
         <div className='menu-selection-container'>
             {hauptspeisenBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
-                    <h4>{categoryItem.category}</h4>
+                    <div>
+                    <h4 className="category-label">{categoryItem.category} </h4>
+                    </div>
                     {categoryItem.dishes.map((dish) => (
                         <div className='food-choice-cont' key={dish} >
                             
@@ -432,6 +476,8 @@ const HauptspeisenContainer = ({ handleChange, formData }) => {
                                 name="meal"
                                 value={dish}
                                 category={categoryItem.category}
+                                sublist={categoryItem.sublist}
+                                subcategory={categoryItem.subcategory}
                                 onChange={e => {
                                     checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
                                     handleChange(e);
@@ -462,6 +508,8 @@ const BroetchenContainer = ({ handleChange, formData }) => {
                             className='ui-checkbox'
                             name="meal"
                             value={dish}
+                            sublist={categoryItem.sublist}
+                            subcategory={categoryItem.subcategory}
                             onChange={e => {
                                 checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
                                 handleChange(e);
@@ -494,6 +542,8 @@ const VorspeisenContainer = ({ handleChange, formData }) => {
                             className='ui-checkbox'
                             name="meal"
                             value={dish}
+                            sublist={categoryItem.sublist}
+                            subcategory={categoryItem.subcategory}
                             onChange={e => {
                                 checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
                                 handleChange(e);
@@ -525,6 +575,8 @@ const FingerfoodContainer = ({ handleChange, formData }) => {
                             className='ui-checkbox'
                             name="meal"
                             value={dish}
+                            sublist={categoryItem.sublist}
+                            subcategory={categoryItem.subcategory}
                             onChange={e => {
                                 checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
                                 handleChange(e);
@@ -556,6 +608,8 @@ const SalatContainer = ({ handleChange, formData }) => {
                             className='ui-checkbox'
                             name="meal"
                             value={dish}
+                            sublist={categoryItem.sublist}
+                            subcategory={categoryItem.subcategory}
                             onChange={e => {
                                 checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
                                 handleChange(e);
@@ -587,6 +641,8 @@ const DesserContainer = ({ handleChange, formData }) => {
                             className='ui-checkbox'
                             name="meal"
                             value={dish}
+                            sublist={categoryItem.sublist}
+                            subcategory={categoryItem.subcategory}
                             onChange={e => {
                                 checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
                                 handleChange(e);
@@ -647,6 +703,8 @@ const FruehstueckContainer = ({ handleChange, formData }) => {
                                 className='ui-checkbox'
                                 name="meal"
                                 value={dish}
+                                sublist={categoryItem.sublist}
+                                subcategory={categoryItem.subcategory}
                                 onChange={e => {
                                     
                                     handleChange(e);

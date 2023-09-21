@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextInput, TextArea, Contact_button, TelephoneInput } from './Contact-components';
+import { TextInput, TextArea, TelephoneInput } from './Contact-components';
 
 /* Container width contact input
 
@@ -25,7 +25,7 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
         },
         message: {
             name: 'message',
-            label: 'Anmerkungen',
+            label: 'Anmerkungen (optional)',
             value: '',
             focus: false,
         },
@@ -39,6 +39,12 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
             name: 'anrede',
             label: 'Anrede',
             value: 'Herr',
+        },
+        unternehmen: {
+            name: 'unternehmen',
+            label: 'Unternehmen (optional)',
+            value: '',
+            focus: false,
         }
     });
 
@@ -49,45 +55,45 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
     const validateFields = (e) => {
         var name = contactData.name.value;
         var email = contactData.email.value;
-        
+
         var telephone = contactData.telephone.value;
 
         var errors = [];
-    
+
         var isValid = true;
-    
+
         if (name === '') {
-          
-          errors.push('name-input');
+
+            errors.push('name-input');
         }
-    
-        if (email === '') { 
-          
+
+        if (email === '') {
+
             errors.push('email-input');
 
 
         }
-        
+
         if (telephone === '') {
             isValid = false;
-            
+
             errors.push('telephone-input');
         }
-    
+
         if (errors.length > 0) {
-        //iterate through errors array and add class to each element
-        errors.forEach((element) => {
-            document.getElementById(element).classList.add('error');
+            //iterate through errors array and add class to each element
+            errors.forEach((element) => {
+                document.getElementById(element).classList.add('error');
             });
         }
         else {
             handleSubmit(e);
         }
-    
-      }
+
+    }
 
 
-      
+
     // func so idt ndoesnt return the whole of contactData but just the important values for the order
     const getValues = (contactData) => {
 
@@ -103,7 +109,7 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
         e.preventDefault();
         const clearContactData = getValues(contactData);
         console.log(clearContactData);
-        
+
 
         // Überprüfe, ob die Checkbox ausgewählt ist
         const privacyCheckbox = document.getElementById('privacy-checkbox');
@@ -182,7 +188,7 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onChange={handleDataChange}
-                required
+                required = {true}
             />
             <TextInput
                 {...contactData.email}
@@ -190,6 +196,18 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
                 onBlur={handleBlur}
                 onChange={handleDataChange}
                 id="email-input"
+                required = {true}
+            />
+
+            <TextInput
+                {...contactData.unternehmen}
+
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                onChange={handleDataChange}
+                id="unternehmen-input"
+                required = {false}
+
             />
             <TelephoneInput
                 {...contactData.telephone}
@@ -197,8 +215,9 @@ const Contact = ({ onSubmit, addPrice, formData }) => {
                 onBlur={handleBlur}
                 onChange={handleDataChange}
                 id="telephone-input"
+                required = {true}
             />
-            
+
             <TextArea
                 {...contactData.message}
                 onFocus={handleFocus}
