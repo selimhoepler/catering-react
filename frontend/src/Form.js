@@ -146,15 +146,15 @@ const Form = () => {
         };
         console.log(value, formData);
       }
-      // UNCHECKED CODE FROM COPILOT
+
       else if (name === 'meal') {
 
         const subCategory = e.target.getAttribute('subcategory');
         const subList = e.target.getAttribute('sublist');
         console.log(subCategory, subList)
         console.log(checked)
-        console.log( formData);
-        console.log( formData['meal']);
+        console.log(formData);
+        console.log(formData['meal']);
         if (Array.isArray(formData[name][subCategory][subList])) {
           const updatedValue = checked
             ? [...formData[name][subCategory][subList], value]
@@ -182,6 +182,11 @@ const Form = () => {
             },
           });
         }
+      } else {
+        setFormData({
+          ...formData,
+          [name]: checked,
+        });
       };
     } else {
       setFormData({
@@ -214,14 +219,31 @@ const Form = () => {
           glas: [],
           broetchen: [],
         }
-  
+
       },
       drinks: [],
     });
   };
 
+
+
+
+  /* 
+
+
+                        *************
+  
+  
+                        PRICE SECTION
+
+
+                        *************
+  
+  
+  */
+
   // Function to calculate price based on user choices and input
-  const calculatePrice = (indicator) => {
+  const calculatePrice = (mealtime) => {
 
     var groupSize = formData.groupSize;
 
@@ -229,20 +251,36 @@ const Form = () => {
     var geschirrTischKosten = 0;
     var hussenKosten = 0;
     var transportKosten;
+    var serviceKosten;
+    var duration;
 
     var price = 0;
 
 
 
 
+    if (mealtime === 'fruehstueck') {
 
-    pricePerPerson = updateGruppenKosten();
+
+
+
+
+
+    }
+
+
+
+
+
+    pricePerPerson = updateSpeiseKosten();
     transportKosten = updateTransportKosten();
     geschirrTischKosten = updateGeschirrTischKosten();
     hussenKosten = updateHussenKosten();
+    serviceKosten = updateServiceKosten();
+    duration = calculateHours();
 
 
-    price = (pricePerPerson * groupSize) + geschirrTischKosten + hussenKosten + transportKosten;
+    price = (pricePerPerson * groupSize) + geschirrTischKosten + hussenKosten + transportKosten + (serviceKosten * duration);
     // console.log("price= ", pricePerPerson, "*", groupSize, "+", geschirrTischKosten, "+", hussenKosten, "+", transportKosten);
 
     return price;
@@ -251,7 +289,7 @@ const Form = () => {
 
   // Change price when formData changes
   useEffect(() => {
-    var tempPrice = calculatePrice("useEffect");
+    var tempPrice = calculatePrice(mealTime);
     setPrice(tempPrice);
     // setFormData({
     //   ...formData,
@@ -267,36 +305,53 @@ const Form = () => {
     var transportKosten = 0;
 
     if (groupSize <= 20) {
-      transportKosten = 40;
-    } else {
-      transportKosten = 60;
+      transportKosten = 30;
+    } else if (groupSize >= 21 && groupSize <= 40) {
+      transportKosten = 50;
+    } else if (groupSize >= 41 && groupSize <= 60) {
+      transportKosten = 65;
+    } else if (groupSize >= 61 && groupSize <= 80) {
+      transportKosten = 90;
+    } else if (groupSize >= 81 && groupSize <= 100) {
+      transportKosten = 100;
+    } else if (groupSize > 100) {
+      console.log('ANFRAGE ?')
+      // PRICE ON REQUEST
     }
 
     return transportKosten;
   }
 
-  function updateGruppenKosten() {
-    var groupSize = formData.groupSize;
+  function updateSpeiseKosten() {
+
     var pricePerPerson = 0;
+    const buffet = formData.meal.buffet;
 
-    if (groupSize >= 0 && groupSize <= 20) {
-      pricePerPerson = 11;
-    } else if (groupSize >= 21 && groupSize <= 40) {
-      pricePerPerson = 10;
 
-    } else if (groupSize >= 41 && groupSize <= 60) {
-      pricePerPerson = 9;
+    var hauptspeiseCount = false;
+    var vorspeiseCount = false;
+    var dessertCount = false;
 
-    } else if (groupSize >= 61 && groupSize <= 80) {
-      pricePerPerson = 8;
 
-    } else {
-      pricePerPerson = 0;
-    }
+
+    hauptspeiseCount = buffet.hauptspeise.length !== 0
+    vorspeiseCount = buffet.vorspeise.length !== 0
+    dessertCount = buffet.dessert.length !== 0
+
+    if (hauptspeiseCount) { pricePerPerson += 22 }
+    if (vorspeiseCount) { pricePerPerson += 7 }
+    if (dessertCount) { pricePerPerson += 5 }
+
+
+
     return pricePerPerson;
+
 
   }
 
+
+
+  //ALREADY NEW PPRICE LOGIC
   function updateGeschirrTischKosten() {
 
     var groupSize = formData.groupSize;
@@ -305,13 +360,17 @@ const Form = () => {
     if (formData.Geschirr) {
 
       if (groupSize >= 1 && groupSize <= 20) {
-        geschirrTischKosten = 45 + 10;  // UPDATE SELIM: added transportCosts 
+        geschirrTischKosten = 30;
       } else if (groupSize >= 21 && groupSize <= 40) {
-        geschirrTischKosten = 65 + 20;  // UPDATE SELIM: added transportCosts
+        geschirrTischKosten = 55;
       } else if (groupSize >= 41 && groupSize <= 60) {
-        geschirrTischKosten = 85;
+        geschirrTischKosten = 80;
       } else if (groupSize >= 61 && groupSize <= 80) {
-        geschirrTischKosten = 110;
+        geschirrTischKosten = 120;
+      } else if (groupSize >= 81 && groupSize <= 100) {
+        geschirrTischKosten = 220;
+      } else if (groupSize >= 101) {
+        geschirrTischKosten = 330;
       }
     }
     return geschirrTischKosten;
@@ -328,6 +387,82 @@ const Form = () => {
     return hussenKosten;
 
   }
+
+  function updateServiceKosten() {
+    var groupSize = formData.groupSize
+    var servicekosten = 0;
+
+    const cl = 35;
+    const kl = 35;
+    const sk = 29.5;
+
+
+    if (groupSize <= 40) {
+      servicekosten += cl + sk;
+    } else if (groupSize > 40 && groupSize <= 60) {
+      servicekosten += cl + (sk * 2)
+    } else if (groupSize > 60 && groupSize <= 80) {
+      servicekosten += cl + (sk * 3) + kl
+    } else if (groupSize > 80 && groupSize <= 100) {
+      servicekosten += cl + (sk * 5) + kl
+    }
+
+    console.log('servicekosten: ', servicekosten)
+
+    return servicekosten;
+
+
+
+
+  }
+
+
+  /* 
+
+
+                        *************
+  
+  
+                        END PRICE SECTION
+
+
+                        *************
+  
+  
+  */
+
+
+
+  //getting the duration on how long everything takes. [TODO: clarify if only full hours]
+  function calculateHours() {
+    // Extract the start_time and end_time from formData
+    const { start_time, end_time } = formData;
+
+    // Convert start_time and end_time into Date objects
+    const startTime = new Date(`1970-01-01T${start_time}:00Z`); // Using UTC to avoid timezone issues
+    const endTime = new Date(`1970-01-01T${end_time}:00Z`);
+
+    // Calculate the difference in milliseconds
+    const diffMilliseconds = endTime - startTime;
+
+    // Convert milliseconds to hours
+    const diffHours = diffMilliseconds / (1000 * 60 * 60);
+
+    // Handling edge cases if end_time is smaller than start_time
+    // For example, if end_time is "02:00" and start_time is "23:00", the function will return -21
+    // You might want to add 24 to the result in this case to get the correct duration
+    if (diffHours < 0) {
+      return diffHours + 24;
+    }
+
+    return diffHours;
+  }
+
+
+
+
+
+
 
 
 

@@ -405,16 +405,26 @@ const checkMaxMeals = (id, groupSize) => {
 
     var maxMeals = 3;
 
-    if (groupSize < 20) {
-        maxMeals = 2;
-    } else {
+    if (groupSize <= 20) {
         maxMeals = 3;
+    } else if (groupSize > 20 && groupSize <= 40 ) {
+        maxMeals = 4;
+    } else if (groupSize > 40 && groupSize <= 80 ) {
+        maxMeals = 5;
+    } else if (groupSize > 80 && groupSize <= 100) {
+        maxMeals = 6;
+    } else if (groupSize > 100) {
+        maxMeals = Infinity;
     }
 
     const container = document.getElementById(id);
     const checkedMeals = container.querySelectorAll('input[name="meal"]:checked');
     if (checkedMeals.length >= maxMeals) {
-        ;
+        
+
+
+
+        // TODO: DISPLAY WARNING ALWAYS WITH NUMBER OF PEOPLE AND ONLY ONE WARNING 
         if (maxMeals === 2) {
             const warnung = document.getElementById('zwei-gerichte');
             warnung.style.transition = 'all 0.5s';
