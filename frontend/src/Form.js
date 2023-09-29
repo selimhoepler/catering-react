@@ -45,7 +45,7 @@ const Form = () => {
     start_time: '09:00',
     end_time: '11:00',
     groupSize: 5,
-    cateringArt: 'fingerfood',
+    cateringArt: 'Fingerfood',
     service: false,
     drinks: [],
     Geschirr: false,
@@ -122,8 +122,7 @@ const Form = () => {
   const handleChange = (e) => {
 
     const { name, value, type, checked } = e.target;
-    const category = e.target.getAttribute('category'); // Holen Sie sich das category-Attribut, wenn es existiert
-    console.log(category);
+
     if (type === 'checkbox') {
       // Überprüfe, ob formData[name] ein Array ist
       if (name === 'drinks') {
@@ -189,6 +188,9 @@ const Form = () => {
         });
       };
     } else {
+
+      console.log(value)
+
       setFormData({
         ...formData,
         [name]: value,
@@ -197,6 +199,24 @@ const Form = () => {
       console.log(value, formData);
     };
   };
+
+
+  const handleChange2 = ({name, value}) => {
+    
+
+
+    console.log(value)
+
+
+    setFormData((prevFormData) =>({
+      ...prevFormData,
+      hallo: value
+    }));
+    console.log(name, value, formData)
+    console.log('handle222');
+
+
+  }
 
 
 
@@ -224,6 +244,30 @@ const Form = () => {
       drinks: [],
     });
   };
+
+  //Change Service to be set when fingerfood is selected
+/*   useEffect(() => {
+
+    console.log('useEffect');
+
+    if (formData.cateringArt === 'Fingerfood') {
+
+      console.log('use Finger')
+
+      setFormData({
+        ...formData,
+        service: true
+      });
+    } else {
+
+      console.log('use not')
+
+      setFormData({
+        ...formData,
+        service: false
+      });
+    }
+  }, [formData.cateringArt]); */
 
 
 
@@ -396,18 +440,18 @@ const Form = () => {
     const kl = 35;
     const sk = 29.5;
 
+    if (formData.service) {
+      if (groupSize <= 40) {
+        servicekosten += cl + sk;
+      } else if (groupSize > 40 && groupSize <= 60) {
+        servicekosten += cl + (sk * 2)
+      } else if (groupSize > 60 && groupSize <= 80) {
+        servicekosten += cl + (sk * 3) + kl
+      } else if (groupSize > 80 && groupSize <= 100) {
+        servicekosten += cl + (sk * 5) + kl
+      }
 
-    if (groupSize <= 40) {
-      servicekosten += cl + sk;
-    } else if (groupSize > 40 && groupSize <= 60) {
-      servicekosten += cl + (sk * 2)
-    } else if (groupSize > 60 && groupSize <= 80) {
-      servicekosten += cl + (sk * 3) + kl
-    } else if (groupSize > 80 && groupSize <= 100) {
-      servicekosten += cl + (sk * 5) + kl
     }
-
-    console.log('servicekosten: ', servicekosten)
 
     return servicekosten;
 
@@ -435,28 +479,25 @@ const Form = () => {
 
   //getting the duration on how long everything takes. [TODO: clarify if only full hours]
   function calculateHours() {
-    // Extract the start_time and end_time from formData
     const { start_time, end_time } = formData;
 
-    // Convert start_time and end_time into Date objects
-    const startTime = new Date(`1970-01-01T${start_time}:00Z`); // Using UTC to avoid timezone issues
+    const startTime = new Date(`1970-01-01T${start_time}:00Z`);
     const endTime = new Date(`1970-01-01T${end_time}:00Z`);
 
-    // Calculate the difference in milliseconds
     const diffMilliseconds = endTime - startTime;
-
-    // Convert milliseconds to hours
     const diffHours = diffMilliseconds / (1000 * 60 * 60);
 
+    // Using Math.ceil() to round up to the nearest whole number
+    const roundedHours = Math.ceil(diffHours);
+
     // Handling edge cases if end_time is smaller than start_time
-    // For example, if end_time is "02:00" and start_time is "23:00", the function will return -21
-    // You might want to add 24 to the result in this case to get the correct duration
-    if (diffHours < 0) {
-      return diffHours + 24;
+    if (roundedHours < 0) {
+      return roundedHours + 24;
     }
 
-    return diffHours;
+    return roundedHours;
   }
+
 
 
 
@@ -636,8 +677,8 @@ const Form = () => {
         </div>
         <br />
         {/* <MealtimeRadioGroup handleChange={handleChange} formData={formData} /> */}
-        <CateringGroupInput handleChange={handleChange} formData={formData} />
-        <MealTime handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime} />
+        <CateringGroupInput handleChange={handleChange2} formData={formData} />
+        <MealTime handleChange={handleChange2} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime} />
 
         <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
           <div className='card-header'> INFO </div>
