@@ -67,7 +67,7 @@ const Form = () => {
     },
     Stehpulte: false,
     stehpulteCount: 0,
-    mealtime: 'Frühstück',
+    mealtime: '',
 
   });
 
@@ -143,7 +143,6 @@ const Form = () => {
             [name]: checked,
           });
         };
-        console.log(value, formData);
       }
 
       else if (name === 'meal') {
@@ -152,7 +151,7 @@ const Form = () => {
         const subList = e.target.getAttribute('sublist');
         console.log(subCategory, subList)
         console.log(checked)
-        console.log(formData);
+
         console.log(formData['meal']);
         if (Array.isArray(formData[name][subCategory][subList])) {
           const updatedValue = checked
@@ -196,28 +195,31 @@ const Form = () => {
         [name]: value,
       });
       console.log(name, value)
-      console.log(value, formData);
     };
   };
 
 
   const handleChange2 = ({name, value}) => {
+    console.log('handleChange2 called with:', {name, value});
     
+    setFormData(prevFormData => {
+      console.log('Previous formData:', prevFormData);
+      const updatedFormData = {...prevFormData, [name]: value};
+      console.log('Updated formData:', updatedFormData);
+      return updatedFormData;
+    });
+  };
+  
 
 
-    console.log(value)
+  useEffect(() => {
 
+    console.log('mealtime changed');
+    handleClearMeal();
 
-    setFormData((prevFormData) =>({
-      ...prevFormData,
-      hallo: value
-    }));
-    console.log(name, value, formData)
-    console.log('handle222');
+  }, [formData.mealtime, formData.cateringArt]);
 
-
-  }
-
+  
 
 
   // clear meal and drinks from formData when either mealtime changes or switching between fingerfood and buffet.
@@ -246,7 +248,7 @@ const Form = () => {
   };
 
   //Change Service to be set when fingerfood is selected
-/*   useEffect(() => {
+  useEffect(() => {
 
     console.log('useEffect');
 
@@ -267,7 +269,7 @@ const Form = () => {
         service: false
       });
     }
-  }, [formData.cateringArt]); */
+  }, [formData.cateringArt]);
 
 
 
@@ -335,6 +337,8 @@ const Form = () => {
   useEffect(() => {
     var tempPrice = calculatePrice(mealTime);
     setPrice(tempPrice);
+
+    console.log('formData updated:', formData);
     // setFormData({
     //   ...formData,
     //   preis: price,
@@ -677,8 +681,8 @@ const Form = () => {
         </div>
         <br />
         {/* <MealtimeRadioGroup handleChange={handleChange} formData={formData} /> */}
-        <CateringGroupInput handleChange={handleChange2} formData={formData} />
-        <MealTime handleChange={handleChange2} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime} />
+        <CateringGroupInput handleChange={handleChange} formData={formData} />
+        <MealTime handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime} />
 
         <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
           <div className='card-header'> INFO </div>

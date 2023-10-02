@@ -85,7 +85,7 @@ const CateringArt = ({ handleChange, formData, clearMeal }) => {
                     onClick={(e) => {
                         setSelectedValue("Fingerfood");
                         handleChange(e);
-                        handleSelect();
+                        // handleSelect();
                     }}
                 >
                     Fingerfood
@@ -97,7 +97,7 @@ const CateringArt = ({ handleChange, formData, clearMeal }) => {
                     onClick={(e) => {
                         setSelectedValue("Buffet");
                         handleChange(e);
-                        handleSelect();
+                        // handleSelect();
                     }}
                 >
                     Buffet

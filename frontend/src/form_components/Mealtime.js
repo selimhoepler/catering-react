@@ -13,6 +13,8 @@ const MealTime = ({ handleChange, formData, clearMeal, setMealtime }) => {
 
 
 
+
+
     //resizes component and stacks it vertical after a specific width
     // had to do it this way because it is a react-bootstrap comp where changing styles in CSS is alot more tedious lmao
     useEffect(() => {
@@ -46,14 +48,14 @@ const MealTime = ({ handleChange, formData, clearMeal, setMealtime }) => {
     }, []);
 
 
-
-
+   
 
 
 
 
     return (
         <div className='mealtime-select'>
+            
 
             <label htmlFor="mealtime" style={{ marginBottom: '5px', marginTop: '10px' }}>
                 Wählen Sie die Art der Mahlzeit aus:
@@ -63,27 +65,28 @@ const MealTime = ({ handleChange, formData, clearMeal, setMealtime }) => {
 
                 <ButtonGroup size={btnSize} id="mealtime" aria-label="Mahlzeit Art auswaehlen" className='my-btn-group'>
                     <Button
-                        name='mealtime'
-                        value='Frühstück'
+                        name="mealtime"
+                        value="Frühstück"
                         className={selectedValue === "Frühstück" ? "my-button-active" : "my-button-inactive"}
                         onClick={(e) => {
                             setSelectedValue("Frühstück");
-                            handleChange({ name: 'mealtime', value: 'Frühstück' });
+                            handleChange(e);
                             setMealtime('fruehstueck');
-                            clearMeal();
+                            // clearMeal();
+                            
                         }}
                     >
                         Frühstück
                     </Button>
                     <Button
-                        name='mealtime'
-                        value='Mittag'
+                        name="mealtime"
+                        value="Mittag"
                         className={selectedValue === "Mittag" ? "my-button-active" : "my-button-inactive"}
                         onClick={(e) => {
                             setSelectedValue("Mittag");
-                            handleChange({ name: 'mealtime', value: 'Mittag' });
+                            handleChange(e);
                             setMealtime('mittag');
-                            clearMeal();
+                            // clearMeal();
                         }}
                     >
                         Mittag/Abendessen
