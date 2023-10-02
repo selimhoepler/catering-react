@@ -45,7 +45,7 @@ const Form = () => {
     start_time: '09:00',
     end_time: '11:00',
     groupSize: 5,
-    cateringArt: 'Fingerfood',
+    cateringArt: 'Buffet',
     service: false,
     drinks: [],
     Geschirr: false,
@@ -93,8 +93,10 @@ const Form = () => {
 
 
 
-      console.log(formData, contactData);
+      
       const data = { formData, contactData };
+      console.log(data)
+
     } catch (error) {
       console.log(error);
     }
@@ -122,6 +124,8 @@ const Form = () => {
   const handleChange = (e) => {
 
     const { name, value, type, checked } = e.target;
+
+
 
     if (type === 'checkbox') {
       // Überprüfe, ob formData[name] ein Array ist
@@ -188,7 +192,7 @@ const Form = () => {
       };
     } else {
 
-      console.log(value)
+
 
       setFormData({
         ...formData,
@@ -199,19 +203,9 @@ const Form = () => {
   };
 
 
-  const handleChange2 = ({name, value}) => {
-    console.log('handleChange2 called with:', {name, value});
-    
-    setFormData(prevFormData => {
-      console.log('Previous formData:', prevFormData);
-      const updatedFormData = {...prevFormData, [name]: value};
-      console.log('Updated formData:', updatedFormData);
-      return updatedFormData;
-    });
-  };
-  
 
-
+  //Clear meal array in FormData when user switches between options:
+  // TODO:  Maybe (?) - Keep checkboxes checked and NOT clearMeal(). Depends on whats better and clearer for user. If: should be done in Akkordion.JS
   useEffect(() => {
 
     console.log('mealtime changed');
@@ -219,7 +213,7 @@ const Form = () => {
 
   }, [formData.mealtime, formData.cateringArt]);
 
-  
+
 
 
   // clear meal and drinks from formData when either mealtime changes or switching between fingerfood and buffet.
@@ -250,26 +244,27 @@ const Form = () => {
   //Change Service to be set when fingerfood is selected
   useEffect(() => {
 
-    console.log('useEffect');
+    if (formData.mealtime === 'Mittag') {
 
-    if (formData.cateringArt === 'Fingerfood') {
+      if (formData.cateringArt === 'Fingerfood') {
 
-      console.log('use Finger')
 
-      setFormData({
-        ...formData,
-        service: true
-      });
-    } else {
 
-      console.log('use not')
+        setFormData({
+          ...formData,
+          service: true
+        });
+      } else {
 
-      setFormData({
-        ...formData,
-        service: false
-      });
+
+
+        setFormData({
+          ...formData,
+          service: false
+        });
+      }
     }
-  }, [formData.cateringArt]);
+  }, [formData.cateringArt, formData.mealtime]);
 
 
 
@@ -304,21 +299,17 @@ const Form = () => {
 
 
 
-
-    if (mealtime === 'fruehstueck') {
-
-
+    // 11 Euros pP if not Buffet
+    if (mealtime === 'fruehstueck' || formData.cateringArt === 'Fingerfood' ) {
 
 
+      pricePerPerson = 11;
+      console.log(pricePerPerson)
 
+    } else {
 
+      pricePerPerson = updateSpeiseKosten();
     }
-
-
-
-
-
-    pricePerPerson = updateSpeiseKosten();
     transportKosten = updateTransportKosten();
     geschirrTischKosten = updateGeschirrTischKosten();
     hussenKosten = updateHussenKosten();
@@ -327,7 +318,7 @@ const Form = () => {
 
 
     price = (pricePerPerson * groupSize) + geschirrTischKosten + hussenKosten + transportKosten + (serviceKosten * duration);
-    // console.log("price= ", pricePerPerson, "*", groupSize, "+", geschirrTischKosten, "+", hussenKosten, "+", transportKosten);
+    console.log("price= ", pricePerPerson, "*", groupSize, "+", geschirrTischKosten, "+", hussenKosten, "+", transportKosten);
 
     return price;
 
@@ -336,6 +327,7 @@ const Form = () => {
   // Change price when formData changes
   useEffect(() => {
     var tempPrice = calculatePrice(mealTime);
+    console.log(mealTime)
     setPrice(tempPrice);
 
     console.log('formData updated:', formData);
@@ -599,16 +591,16 @@ const Form = () => {
     var meal = formData.meal;
     var errors = [];
 
-    var isValid = true;
+    
 
     if (date === '') {
-      isValid = false;
+      
       errors.date = "Bitte wählen Sie ein Datum.";
 
     }
 
     if (meal.length === 0) {
-      isValid = false;
+      
       errors.meal = "Sie haben nichts zu essen gewählt.";
 
 
@@ -673,7 +665,7 @@ const Form = () => {
             Ende:
           </label>
           <input type="time" id="end_time" name="end_time" min="09:00" max="18:00" value={formData.end_time} onChange={(e) => {
-            const newValue = e.target.value; // Capture the event value
+            
 
             handleChange(e); // Call the first function with the event
 

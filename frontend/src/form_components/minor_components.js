@@ -58,6 +58,7 @@ const Auststattung = ({ handleChange, formData }) => {
                 label="Service vor Ort"
                 name='service'
                 value={formData.service}
+                checked={formData.service}
                 onChange={handleChange}
             />
         </div>

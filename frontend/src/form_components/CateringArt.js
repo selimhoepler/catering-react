@@ -27,8 +27,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 
 const CateringArt = ({ handleChange, formData, clearMeal }) => {
-    const [selectedValue, setSelectedValue] = useState('Fingerfood');
+    const [selectedValue, setSelectedValue] = useState(formData.cateringArt);
     const [tabVariant, setTabVariant] = useState('initial');
+
+    console.log(selectedValue)
 
 
 
@@ -61,11 +63,11 @@ const CateringArt = ({ handleChange, formData, clearMeal }) => {
 
 
 
-    const handleSelect = () => {
+/*     const handleSelect = () => {
 
         clearMeal();
 
-    }
+    } */
 
 
 
@@ -217,9 +219,9 @@ const CateringArt = ({ handleChange, formData, clearMeal }) => {
                         style={{ marginTop: '10px' }}
                         fill
                     >
-                        <Tab eventKey="glas" title="Fingerfood im Glas" id='nav-item-glas'>
+                        <Tab.Pane eventKey="glas" title="Fingerfood im Glas" id='nav-item-glas'>
                             <FingerfoodContainer handleChange={handleChange} formData={formData} />
-                        </Tab>
+                        </Tab.Pane>
                         <Tab eventKey="Broetchen" title="Brötchen">
                             <BroetchenContainer handleChange={handleChange} formData={formData} />
                         </Tab>
@@ -244,7 +246,7 @@ const CateringArt = ({ handleChange, formData, clearMeal }) => {
                         <Tab eventKey="starters" title="Vorspeisen" id='nav-item-glas'>
                             <VorspeisenContainer handleChange={handleChange} formData={formData} />
                         </Tab>
-                        <Tab eventKey="main" title="hauptspeisen">
+                        <Tab eventKey="main" title="Hauptspeisen">
                             <HauptspeisenContainer handleChange={handleChange} formData={formData} />
                         </Tab>
                         <Tab eventKey="salat" title="Salat">

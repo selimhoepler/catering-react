@@ -452,42 +452,42 @@ button[type="submit"]:hover {
   text-shadow: 0px 0px 10px #000000;
 }
 
-#nav-item-glas {
+#nav-item-glas, #fill-tab-example-tab-glas {
   background-image: url("https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg?t=st=1693481873~exp=1693482473~hmac=5751f5583253f3c6766ff9782c555e09482ef6e341dfd94887d2184586a0a119");
   background-size: cover;
 }
 
-#nav-item-bread {
+#nav-item-bread, #fill-tab-example-tab-Broetchen {
   background-image: url("https://img.freepik.com/free-photo/homemade-meat-snack-chicken-liver-pate-with-savory-olives_2829-11219.jpg?t=st=1693486101~exp=1693486701~hmac=056d9720f1522f8237eb5c11acbd156c78168a2c3d07335f2bcf1260f4ce9551");
   background-size: cover;
 }
 
-#nav-item-starters {
+#nav-item-starters, #fill-tab-example-tab-starters {
   background-image: url("https://img.freepik.com/free-photo/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table_2829-19744.jpg?t=st=1693481873~exp=1693482473~hmac=5751f5583253f3c6766ff9782c555e09482ef6e341dfd94887d2184586a0a119");
   background-size: cover;
 }
 
-#nav-item-main {
+#nav-item-main, #fill-tab-example-tab-main {
   background-image: url("https://img.freepik.com/free-photo/juicy-steak-medium-rare-beef-with-spices-grilled-vegetables_2829-18672.jpg?t=st=1693481873~exp=1693482473~hmac=32ba1310e9786a06ded1564fae7aa15ec18ac8618baa177e3ea643153705e82b");
   background-size: cover;
 }
 
-#nav-item-salad {
+#nav-item-salad, #fill-tab-example-tab-salat {
   background-image: url("https://img.freepik.com/free-photo/salad-from-tomatoes-cucumber-red-onions-lettuce-leaves-healthy-summer-vitamin-menu-vegan-vegetable-food-vegetarian-dinner-table-top-view-flat-lay_2829-6482.jpg?t=st=1693481873~exp=1693482473~hmac=268ccd81e1f20a440b9c0cc6ff2ae183ff4c2a2e17a3f8f6ff125a88be99a29e");
   background-size: cover;
 }
 
-#nav-item-dessert {
+#nav-item-dessert, #fill-tab-example-tab-dessert {
   background-image: url("https://img.freepik.com/free-photo/tart-with-strawberries-whipped-cream-decorated-with-mint-leaves-top-view_2829-19973.jpg?t=st=1693484032~exp=1693484632~hmac=a14c9d309f0a1465885949ccc0c8a94e4bd28c9af47b58b98c98b9264c13b1c0");
   background-size: cover;
 }
 
-#nav-item-drinks {
+#nav-item-drinks, #fill-tab-example-tab-drinks {
   background-image: url("https://img.freepik.com/free-photo/front-close-view-organic-fresh-juices-bottles-served-with-tubes-fruits-wooden-cutting-board-brown-table_140725-94487.jpg?t=st=1693481873~exp=1693482473~hmac=567254d1bbc9785ec77752789a8803e672e5a6edfaa28dd113ddbf8b0addb619");
   background-size: cover;
 }
 
-#nav-item-breakfast {
+#nav-item-breakfast, #fill-tab-example-tab-fruhstuck {
   background-image: url("https://img.freepik.com/free-photo/english-breakfast-toast-egg-bacon-vegetables-rustic-style-wooden-table_2829-19790.jpg?t=st=1694085464~exp=1694086064~hmac=b5e18d73ac2acc62bec33ec3bd67a699833378b45202d403c005dd90dc8b6a87");
   background-size: cover;
 }
@@ -988,18 +988,26 @@ button[type="submit"]:hover {
 
   .nav-link {
     text-shadow: none;
-    color: #e75012 !important;
+    color: rgba(255, 255, 255, 0.82) !important;
+    /* test for links */
+    box-shadow: inset 0 0 0 2000px #00000094;
+    transition: all 0.4s ease-in-out !important;
+    
   }
 
   .nav-link.active {
     color: white !important;
-    background-color: #e75012 !important;
-    border-color: #e75012 !important;
+    /* background-color: #e75012 !important; */
+    /* border-color: #e75012 !important; */
+    border-color: transparent !important;
+    box-shadow: none;
   }
 
   .nav-item button:hover {
     color: white !important;
-    border-color: #e75012 !important;
+    /* border-color: #e75012 !important; */
+    box-shadow: none;
+
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
   }
@@ -1012,11 +1020,16 @@ button[type="submit"]:hover {
 
   .nav-tabs {
     --bs-nav-tabs-border-radius: none !important;
+    --bs-nav-tabs-border-width: none !important;
   }
 
   .tab-content {
     width: 100%;
 
+  }
+
+  .my-btn-group{
+    margin-top:10px;
   }
 }
 
@@ -1061,18 +1074,18 @@ button[type="submit"]:hover {
 
   .nav-link {
     text-shadow: none;
-    color: #e75012 !important;
+    /* color: #e75012 !important; */
   }
 
   .nav-link.active {
     color: white !important;
     background-color: #e75012 !important;
-    border-color: #e75012 !important;
+    /* border-color: #e75012 !important; */
   }
 
   .nav-item button:hover {
     color: white !important;
-    border-color: #e75012 !important;
+    /* border-color: #e75012 !important; */
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
   }
@@ -1135,18 +1148,18 @@ button[type="submit"]:hover {
 
   .nav-link {
     text-shadow: none;
-    color: #e75012 !important;
+    /* color: #e75012 !important; */
   }
 
   .nav-link.active {
     color: white !important;
     background-color: #e75012 !important;
-    border-color: #e75012 !important;
+    /* border-color: #e75012 !important; */
   }
 
   .nav-item button:hover {
     color: white !important;
-    border-color: #e75012 !important;
+    /* border-color: #e75012 !important; */
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
   }
@@ -1216,18 +1229,18 @@ button[type="submit"]:hover {
 
   .nav-link {
     text-shadow: none;
-    color: #e75012 !important;
+    /* color: #e75012 !important; */
   }
 
   .nav-link.active {
     color: white !important;
     background-color: #e75012 !important;
-    border-color: #e75012 !important;
+    /* border-color: #e75012 !important; */
   }
 
   .nav-item button:hover {
     color: white !important;
-    border-color: #e75012 !important;
+    /* border-color: #e75012 !important; */
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
   }
