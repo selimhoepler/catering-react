@@ -68,7 +68,7 @@ const MealTime = ({ handleChange, formData, clearMeal, setMealtime }) => {
                         className={selectedValue === "Frühstück" ? "my-button-active" : "my-button-inactive"}
                         onClick={(e) => {
                             setSelectedValue("Frühstück");
-                            handleChange({ name: 'cateringArt', value: 'Fingerfood' });
+                            handleChange({ name: 'mealtime', value: 'Frühstück' });
                             setMealtime('fruehstueck');
                             clearMeal();
                         }}
@@ -81,7 +81,7 @@ const MealTime = ({ handleChange, formData, clearMeal, setMealtime }) => {
                         className={selectedValue === "Mittag" ? "my-button-active" : "my-button-inactive"}
                         onClick={(e) => {
                             setSelectedValue("Mittag");
-                            handleChange({ name: 'cateringArt', value: 'Mittag' });
+                            handleChange({ name: 'mealtime', value: 'Mittag' });
                             setMealtime('mittag');
                             clearMeal();
                         }}
