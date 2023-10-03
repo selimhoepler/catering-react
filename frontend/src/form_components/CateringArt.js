@@ -30,7 +30,7 @@ const CateringArt = ({ handleChange, formData, clearMeal }) => {
     const [selectedValue, setSelectedValue] = useState(formData.cateringArt);
     const [tabVariant, setTabVariant] = useState('initial');
 
-    console.log(selectedValue)
+    
 
 
 

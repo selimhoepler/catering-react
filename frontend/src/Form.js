@@ -4,6 +4,7 @@ import { CateringGroupInput, Auststattung } from './form_components/minor_compon
 import Contact from './form_components/contact/Contact';
 import MealTime from './form_components/Mealtime';
 import Fruehstueck from './form_components/Fruestueck';
+import GroupSizeInfo from './form_components/GroupsizeInfo';
 import { generatePDF } from './MyPdf';
 
 
@@ -153,10 +154,8 @@ const Form = () => {
 
         const subCategory = e.target.getAttribute('subcategory');
         const subList = e.target.getAttribute('sublist');
-        console.log(subCategory, subList)
-        console.log(checked)
+        console.log(subCategory, subList, value)
 
-        console.log(formData['meal']);
         if (Array.isArray(formData[name][subCategory][subList])) {
           const updatedValue = checked
             ? [...formData[name][subCategory][subList], value]
@@ -318,7 +317,7 @@ const Form = () => {
 
 
     price = (pricePerPerson * groupSize) + geschirrTischKosten + hussenKosten + transportKosten + (serviceKosten * duration);
-    console.log("price= ", pricePerPerson, "*", groupSize, "+", geschirrTischKosten, "+", hussenKosten, "+", transportKosten);
+    // console.log("price= ", pricePerPerson, "*", groupSize, "+", geschirrTischKosten, "+", hussenKosten, "+", transportKosten);
 
     return price;
 
@@ -327,7 +326,7 @@ const Form = () => {
   // Change price when formData changes
   useEffect(() => {
     var tempPrice = calculatePrice(mealTime);
-    console.log(mealTime)
+    // console.log(mealTime)
     setPrice(tempPrice);
 
     console.log('formData updated:', formData);
@@ -676,7 +675,7 @@ const Form = () => {
         <CateringGroupInput handleChange={handleChange} formData={formData} />
         <MealTime handleChange={handleChange} formData={formData} clearMeal={handleClearMeal} setMealtime={setMealtime} />
 
-        <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
+{/*         <div className='card info-card shadowy' style={{ marginTop: '20px', overflow: 'hidden' }}>
           <div className='card-header'> INFO </div>
           <div className='card-body' id='zwei-gerichte'>
             <strong>Für eine Gruppengröße von 5-20 Personen</strong>
@@ -688,7 +687,8 @@ const Form = () => {
             <br />
             <small>Können 3 Gerichte pro Kategorie ausgewählt werden</small>
           </div>
-        </div>
+        </div> */}
+        <GroupSizeInfo formData={formData} />
       </div>
 
 

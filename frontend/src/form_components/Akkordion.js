@@ -417,16 +417,22 @@ const checkMaxMeals = (id, groupSize) => {
         maxMeals = Infinity;
     }
 
-    const container = document.getElementById(id);
-    const checkedMeals = container.querySelectorAll('input[name="meal"]:checked');
+    // const container = document.getElementById(id);
+    const container = document.getElementById(id)
+
+    const checkedMeals = container.querySelectorAll('input:checked');
+
+
+
+
     if (checkedMeals.length >= maxMeals) {
         
 
 
 
         // TODO: DISPLAY WARNING ALWAYS WITH NUMBER OF PEOPLE AND ONLY ONE WARNING 
-        if (maxMeals === 2) {
-            const warnung = document.getElementById('zwei-gerichte');
+        
+            const warnung = document.getElementById('gerichte');
             warnung.style.transition = 'all 0.5s';
             warnung.style.transform = 'scale(1.1)';
             warnung.style.color = 'red';
@@ -438,19 +444,14 @@ const checkMaxMeals = (id, groupSize) => {
                 warnung.style.color = 'initial'; // Zurück zum ursprünglichen Farbwert
             }, 1000);
 
-        } else {
-            const warnung = document.getElementById('drei-gerichte');
-            warnung.style.transition = 'all 0.5s';
-            warnung.style.transform = 'scale(1.1)';
-            warnung.style.color = 'red';
+        
 
-    
-            // Hier wird der Stil nach 2 Sekunden zurückgesetzt
-            setTimeout(() => {
-                warnung.style.transform = 'scale(1.0)';
-                warnung.style.color = 'initial'; // Zurück zum ursprünglichen Farbwert
-            }, 1000);
-        }
+
+
+        /* array.forEach(element => {
+            
+        }); */
+
         const allMeals = container.querySelectorAll('input[name="meal"]');
         allMeals.forEach((mealCheckbox) => {
             if (!mealCheckbox.checked) {
@@ -471,7 +472,7 @@ const checkMaxMeals = (id, groupSize) => {
 
 const HauptspeisenContainer = ({ handleChange, formData }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' id='hauptspeisen-container'>
             {hauptspeisenBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <div>
@@ -489,7 +490,7 @@ const HauptspeisenContainer = ({ handleChange, formData }) => {
                                 sublist={categoryItem.sublist}
                                 subcategory={categoryItem.subcategory}
                                 onChange={e => {
-                                    checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                    checkMaxMeals('hauptspeisen-container', formData.groupSize);
                                     handleChange(e);
                                 }
                                 }
@@ -506,7 +507,7 @@ const HauptspeisenContainer = ({ handleChange, formData }) => {
 }
 const BroetchenContainer = ({ handleChange, formData }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' id='broetchen-container'>
             {BroetchenBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
@@ -521,7 +522,7 @@ const BroetchenContainer = ({ handleChange, formData }) => {
                             sublist={categoryItem.sublist}
                             subcategory={categoryItem.subcategory}
                             onChange={e => {
-                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                checkMaxMeals('broetchen-container', formData.groupSize);
                                 handleChange(e);
                             }
                             }
@@ -540,7 +541,7 @@ const BroetchenContainer = ({ handleChange, formData }) => {
 
 const VorspeisenContainer = ({ handleChange, formData }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' id='vorspeisen-container'>
             {vorspeisenBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
@@ -555,7 +556,7 @@ const VorspeisenContainer = ({ handleChange, formData }) => {
                             sublist={categoryItem.sublist}
                             subcategory={categoryItem.subcategory}
                             onChange={e => {
-                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                checkMaxMeals('vorspeisen-container', formData.groupSize);
                                 handleChange(e);
                             }
                             }
@@ -573,7 +574,7 @@ const VorspeisenContainer = ({ handleChange, formData }) => {
 
 const FingerfoodContainer = ({ handleChange, formData }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' id='fingerfood-container'>
             {fingerfoodBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
@@ -588,7 +589,7 @@ const FingerfoodContainer = ({ handleChange, formData }) => {
                             sublist={categoryItem.sublist}
                             subcategory={categoryItem.subcategory}
                             onChange={e => {
-                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                checkMaxMeals('fingerfood-container', formData.groupSize);
                                 handleChange(e);
                             }
                             }
@@ -606,7 +607,7 @@ const FingerfoodContainer = ({ handleChange, formData }) => {
 
 const SalatContainer = ({ handleChange, formData }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' id='salat-container'>
             {salatbuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
@@ -621,7 +622,7 @@ const SalatContainer = ({ handleChange, formData }) => {
                             sublist={categoryItem.sublist}
                             subcategory={categoryItem.subcategory}
                             onChange={e => {
-                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                checkMaxMeals('salat-container', formData.groupSize);
                                 handleChange(e);
                             }
                             }
@@ -639,7 +640,7 @@ const SalatContainer = ({ handleChange, formData }) => {
 
 const DesserContainer = ({ handleChange, formData }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' id='dessert-container'>
             {dessertBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
@@ -654,7 +655,7 @@ const DesserContainer = ({ handleChange, formData }) => {
                             sublist={categoryItem.sublist}
                             subcategory={categoryItem.subcategory}
                             onChange={e => {
-                                checkMaxMeals(categoryItem.category.toLowerCase(), formData.groupSize);
+                                checkMaxMeals('dessert-container', formData.groupSize);
                                 handleChange(e);
                             }
                             }
@@ -672,7 +673,7 @@ const DesserContainer = ({ handleChange, formData }) => {
 
 const GetraenkeContainer = ({ handleChange }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' id='getraenke-container'>
             {getraenkBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
@@ -701,7 +702,7 @@ const GetraenkeContainer = ({ handleChange }) => {
 
 const FruehstueckContainer = ({ handleChange, formData }) => {
     return (
-        <div className='menu-selection-container'>
+        <div className='menu-selection-container' >
             {fruehstueckBuffet.map((categoryItem) => (
                 <div key={categoryItem.category} className="card menu-card" id={categoryItem.category.toLowerCase()}>
                     <h4>{categoryItem.category}</h4>
